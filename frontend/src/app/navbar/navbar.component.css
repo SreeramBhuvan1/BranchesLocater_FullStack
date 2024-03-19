@@ -1,0 +1,10 @@
+.container {
+    display: flex;
+    align-items: center; /* Vertically center the items */
+  }
+  h3 {
+    margin-right: 60px; /* Add some spacing between the heading and menu bar */
+  }
+  p-menubar{
+    margin-right: 10px;
+  }
