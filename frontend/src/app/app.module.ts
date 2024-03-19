@@ -13,10 +13,14 @@ import { ToolbarModule } from 'primeng/toolbar';
 import { AccordionModule } from 'primeng/accordion';
 import { ButtonModule } from 'primeng/button';
 import { ListboxModule } from 'primeng/listbox';
+import { BranchesComponent } from './branches/branches.component';
+import { CitiesComponent } from './cities/cities.component';
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent
+    NavbarComponent,
+    BranchesComponent,
+    CitiesComponent
   ],
   imports: [
     BrowserModule,
