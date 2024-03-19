@@ -7,21 +7,21 @@ import { MenuItem } from 'primeng/api';
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
-  items:MenuItem[]|undefined;
-  items1:MenuItem[]|undefined;
-  Branch='Branches';
+  items: MenuItem[] | undefined;
+  activeItem: MenuItem;
+
   ngOnInit(): void {
-    this.items=[
+    this.items = [
       {
-        label:'Branches'
+        label: 'Branches'
       },
       {
-        label:'Countries'
+        label: 'Countries'
       }
     ];
-    
+    this.activeItem = this.items[0];
   }
-  clicked(){
+  clicked() {
     console.log("navbar clicked");
   }
 }
