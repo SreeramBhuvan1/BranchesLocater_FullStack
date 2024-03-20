@@ -1,0 +1,69 @@
+<div class="grid justify-center align-center" style="
+    position: relative;
+    margin: 0px;
+    height: 100vh;">
+    <div style="
+        position: absolute;
+        content: '';
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url(https://i.ytimg.com/vi/TA27PyKB1MI/maxresdefault.jpg);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        opacity: 0.75;
+    "></div>
+    <div class="col-12 md:col-4 md:col-offset-4" style="padding: 5%; z-index: 2;">
+        <div style="border: 1px solid red; background-color: rgb(226, 163, 163); text-align: center; color: red;"
+            *ngIf="error">
+            <p>
+                {{error}}
+            </p>
+        </div>
+        <div *ngIf="isLoading" style="text-align: center;">
+            <p-progressSpinner ariaLabel="loading"></p-progressSpinner>
+        </div>
+        <form
+            style="padding: 2%; margin-top: 2%; background-color: white; box-shadow: 5px 5px rgb(144, 149, 150); border-radius: 2%; "
+            #authForm="ngForm" (ngSubmit)="onSubmit(authForm)" *ngIf="!isLoading">
+            <div class="field">
+                <label for="email">E-Mail</label>
+                <input type="email" id="email"
+                    class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+                    ngModel name="email" required email>
+            </div>
+            <div class="field">
+                <label for="password">Password</label>
+                <input type="password" id="password"
+                    class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+                    ngModel name="password" required minlength="6">
+            </div>
+            <div class="field" *ngIf="!isLoginMode">
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" id="confirmPassword"
+                    class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+                    ngModel name="confirmPassword" required minlength="6">
+            </div>
+            <div class="field" *ngIf="!isLoginMode">
+                <label for="firstname">First Name</label>
+                <input type="text" id="firstname"
+                    class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+                    ngModel name="firstname" required>
+            </div>
+            <div class="field" *ngIf="!isLoginMode">
+                <label for="lastname">Last Name</label>
+                <input type="text" id="lastname"
+                    class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+                    ngModel name="lastname" required>
+            </div>
+            <div class="grid justify-content-around" style="margin-top: 2%;">
+                <button class="col-5" pButton type="submit" [disabled]="!authForm.valid"
+                    label="{{ isLoginMode ? 'Login' : 'Signup' }}"></button>
+                <button class="col-5" pButton (click)="onSwitchMode(authForm)" type="button"
+                    label="{{ isLoginMode ? 'Switch to Signup' : 'Switch to Login' }}"></button>
+            </div>
+        </form>
+    </div>
+</div>

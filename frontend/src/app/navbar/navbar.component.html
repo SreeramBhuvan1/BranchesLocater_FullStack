@@ -1,12 +1,12 @@
 <p-menubar>
-    <ng-template pTemplate="start">
-      <div class="container">
-        <h3> Fastenal</h3>
-        <p-tabMenu [scrollable]="true" [model]="items" [activeItem]="activeItem"></p-tabMenu>
-       
-      </div>
-    </ng-template>
-    <ng-template pTemplate="end">
-      <p-button  severity="danger"> Logout</p-button>
-    </ng-template>
-  </p-menubar>
+  <ng-template pTemplate="start">
+    <div class="container">
+      <h3> Fastenal</h3>
+      <p-tabMenu [scrollable]="true" [model]="items" [activeItem]="activeItem"></p-tabMenu>
+
+    </div>
+  </ng-template>
+  <ng-template pTemplate="end">
+    <p-button severity="danger" (click)="onLogout()"> Logout</p-button>
+  </ng-template>
+</p-menubar>
