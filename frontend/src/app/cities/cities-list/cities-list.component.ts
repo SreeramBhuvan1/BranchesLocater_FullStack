@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CitiesService } from '../../shared-sources/cities-service';
 import { CityDetail } from '../../shared-sources/cities-model';
+import {  Router } from '@angular/router';
 
 @Component({
   selector: 'app-cities-list',
@@ -8,8 +9,8 @@ import { CityDetail } from '../../shared-sources/cities-model';
   styleUrl: './cities-list.component.css'
 })
 export class CitiesListComponent implements OnInit {
-  @Output() newItemEvent = new EventEmitter<CityDetail>();
-  constructor(public cityservice:CitiesService){
+  
+  constructor(public cityservice:CitiesService,private router:Router){
   }
   // ngOnInit(): void {
   //   this.cityservice.refreshList();
@@ -17,7 +18,5 @@ export class CitiesListComponent implements OnInit {
   ngOnInit(){
     this.cityservice.refreshList();
   }
-  clicked(city:CityDetail){
-    this.newItemEvent.emit(city);
-  }
+ 
 }

@@ -1,16 +1,15 @@
-<div class="grid" style="margin:0px; height:100%;">
-    <div class="col-4" >
+<div class="grid justify-content-around" style="margin:0px; height:100%;">
+    <div class="col-5" >
        <div class="grid">
         <div class="col-12">
-            <button pButton pRipple  class="p-button-success">Add </button>
+            <button pButton pRipple  class="p-button-success" routerLink="../cities/add">Add </button>
         </div>
         <div class="col-12" style="height:100%;">
-            <app-cities-list (newItemEvent)="selected($event)"></app-cities-list>
+            <app-cities-list ></app-cities-list>
         </div>
        </div>
     </div>
-    <div class="col-8" style="overflow: auto;">
-        <!-- <app-cities-detailed-view [city]="SelectedCity"></app-cities-detailed-view> -->
-        <app-create-city></app-create-city>
+    <div class="col-5" style="overflow: auto;">
+        <router-outlet></router-outlet>
     </div>
 </div>

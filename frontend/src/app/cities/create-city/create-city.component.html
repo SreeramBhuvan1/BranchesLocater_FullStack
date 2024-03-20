@@ -2,7 +2,7 @@
     <div class="col-8 col-offset-2">
         <p-card>
             <p-panel header="Add City Details">
-                <!-- <form #form="ngForm" (submit)="onSubmit(form)">
+                <form #form="ngForm" (submit)="onSubmit(form)">
                     <div class="grid">
                         <div class="col-12">
                             <div class="flex flex-column gap-2">
@@ -35,15 +35,15 @@
                             </div>
                         </div>
                     </div>
-                </form> -->
+                </form>
             </p-panel>
             <br>
             <div class="grid">
                 <div class="col col-offset-3 ">
-                    <p-button label="Add"></p-button>
+                    <p-button label="Add" routerLink="../"></p-button>
                 </div>
                 <div class="col col-offset-1">
-                    <p-button label="Discard" severity="danger"></p-button>
+                    <p-button label="Discard" severity="danger" routerLink="../"></p-button>
                 </div>
             </div>
         </p-card>
