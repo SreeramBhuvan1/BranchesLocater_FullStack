@@ -1,4 +1,4 @@
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
+import { HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, exhaustMap, take } from "rxjs";
 import { AuthService } from "./auth.service";
@@ -15,9 +15,7 @@ export class AuthInterceptorService implements HttpInterceptor {
             }
             else {
                 const modifiedReq = req.clone({
-                    setHeaders: {
-                        'Bearer': user.token
-                    }
+                    headers: new HttpHeaders().set("Authorization","Bearer "+ user.token)
                 });
                 return next.handle(modifiedReq);
             }

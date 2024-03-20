@@ -9,7 +9,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 })
 export class CitiesDetailedViewComponent implements OnInit{
   id:number;
- city:CityDetail =new CityDetail(6,"tfhv","yufdfy","iugytcg","hgf");
+ city:CityDetail ;
 
   constructor(private service: CitiesService,private router:Router,private activeroute:ActivatedRoute){
   }

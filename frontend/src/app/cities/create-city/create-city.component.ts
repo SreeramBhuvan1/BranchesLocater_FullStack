@@ -9,18 +9,17 @@ import { NgForm } from '@angular/forms';
   styleUrl: './create-city.component.css'
 })
 export class CreateCityComponent {
-  form:NgForm;
+ form:NgForm;
   constructor(public service:CitiesService){
     
   }
   onSubmit(form:NgForm){
+    console.log("hi");
     this.service.postdetails().subscribe({
       next:res=>{
-        this.service.list=res as CityDetail[];
+       this.service.list=res as CityDetail[];
       },
       error:err=>{console.log(err)}
     });
-    
    }
-
 }
