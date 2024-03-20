@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MenuItem } from 'primeng/api';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -10,18 +11,22 @@ export class NavbarComponent {
   items: MenuItem[] | undefined;
   activeItem: MenuItem;
 
+  constructor(private authService: AuthService) { }
+
   ngOnInit(): void {
     this.items = [
       {
-        label: 'Branches'
+        label: 'Branches', routerLink: ['/branches']
       },
       {
-        label: 'Countries'
+        label: 'Countries', routerLink: ['/cities']
       }
     ];
-    this.activeItem = this.items[0];
   }
   clicked() {
     console.log("navbar clicked");
+  }
+  onLogout() {
+    this.authService.logout();
   }
 }
