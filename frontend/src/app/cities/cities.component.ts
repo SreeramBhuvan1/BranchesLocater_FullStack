@@ -9,8 +9,5 @@ import { CityDetail } from '../shared-sources/cities-model';
   styleUrl: './cities.component.css'
 })
 export class CitiesComponent {
-   SelectedCity:CityDetail;
-  selected(city:CityDetail){
-    this.SelectedCity=city;
-  }
+   
 }

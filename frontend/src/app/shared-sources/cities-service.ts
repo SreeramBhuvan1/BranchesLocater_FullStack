@@ -10,7 +10,7 @@ export class CitiesService{
     public list:CityDetail[]=[];
     url:string='https://localhost:7207/api/Cities';
     constructor(private http:HttpClient) { }
-    formdata:CityDetail=new CityDetail();
+    formdata:CityDetail=new CityDetail(0,"","","","");
     refreshList(){
         this.http.get(this.url).subscribe({
           next:res=>{
@@ -20,9 +20,10 @@ export class CitiesService{
         });
     }
     postdetails(){
-        return  this.http.post(this.url,this.formdata)
+        return  this.http.post(this.url,this.formdata);
     }
-    // getCity(id:number){
-    //     return this.list.find(city=>city.cityId==id);
-    // }
+    getCity(id:number){
+        let city = this.list.find(cityId=>cityId.cityId==id);
+        return city;
+    }
 }
