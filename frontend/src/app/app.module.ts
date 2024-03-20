@@ -13,19 +13,36 @@ import { ToolbarModule } from 'primeng/toolbar';
 import { AccordionModule } from 'primeng/accordion';
 import { ButtonModule } from 'primeng/button';
 import { ListboxModule } from 'primeng/listbox';
+import { ScrollPanelModule } from 'primeng/scrollpanel';
 import { BranchesComponent } from './branches/branches.component';
 import { CitiesComponent } from './cities/cities.component';
+import { CardModule } from 'primeng/card';
+import { HttpClientModule } from '@angular/common/http';
+import { FieldsetModule } from 'primeng/fieldset';
+import { CityDetail } from './shared-sources/cities-model';
+import { CitiesService } from './shared-sources/cities-service';
+import { CitiesListComponent } from './cities/cities-list/cities-list.component';
+import { CitiesDetailedViewComponent } from './cities/cities-detailed-view/cities-detailed-view.component';
+import { CreateCityComponent } from './cities/create-city/create-city.component';
+import { TableModule } from 'primeng/table';
+import { PanelModule } from 'primeng/panel';
+
+
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     BranchesComponent,
-    CitiesComponent
+    CitiesComponent,
+    CitiesListComponent,
+    CitiesDetailedViewComponent,
+    CreateCityComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     TabMenuModule,
+    HttpClientModule,
     MenubarModule,
     BrowserAnimationsModule,
     ImageModule,
@@ -34,9 +51,14 @@ import { CitiesComponent } from './cities/cities.component';
     ToolbarModule,
     AccordionModule,
     ButtonModule,
-    ListboxModule
+    ListboxModule,
+    ScrollPanelModule,
+    CardModule,
+    FieldsetModule,
+    TableModule,
+    PanelModule
   ],
-  providers: [],
+  providers: [CitiesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

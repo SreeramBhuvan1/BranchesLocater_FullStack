@@ -1,0 +1,42 @@
+<div class="grid">
+    <div class="col-8 col-offset-2" *ngIf="city">
+        <p-card header=" CityId : {{city.cityId}}">
+            <table style="width: 100%;">
+                <colgroup>
+                    <col span="1" style="background-color:lightgrey">
+                </colgroup>
+                <tr>
+                    <th colspan="2">
+                        City Information
+                    </th>
+                </tr>
+                <tr>
+                    <th style="width: 40%;">City</th>
+                    <td>{{city.cityName}}</td>
+                </tr>
+                <tr>
+                    <th>State</th>
+                    <td>{{city.state}}</td>
+                </tr>
+                <tr>
+                    <th>Country</th>
+                    <td>{{city.country}}</td>
+                </tr>
+                <tr>
+                    <th>Currency</th>
+                    <td>{{city.currency}}</td>
+                </tr>
+            </table>
+            <br>
+            <div class="grid">
+                <div class="col col-offset-3 ">
+                    <p-button label="Edit"></p-button>
+                </div>
+
+                <div class="col col-offset-1">
+                    <p-button label="Delete" severity="danger"></p-button>
+                </div>
+            </div>
+        </p-card>
+    </div>
+</div>
