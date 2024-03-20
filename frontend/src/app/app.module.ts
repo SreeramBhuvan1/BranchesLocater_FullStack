@@ -31,6 +31,7 @@ import { TableModule } from 'primeng/table';
 import { PanelModule } from 'primeng/panel';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
 import { CityStartComponent } from './cities/city-start/city-start.component';
+import { BranchListComponent } from './branches/branch-list/branch-list.component';
 
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {ConfirmationService} from 'primeng/api';
@@ -46,7 +47,8 @@ import { ToastModule } from 'primeng/toast';
     CitiesListComponent,
     CitiesDetailedViewComponent,
     CreateCityComponent,
-    CityStartComponent
+    CityStartComponent,
+    BranchListComponent
   ],
   imports: [
     BrowserModule,
