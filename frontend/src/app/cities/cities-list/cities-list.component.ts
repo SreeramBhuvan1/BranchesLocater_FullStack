@@ -13,12 +13,8 @@ export class CitiesListComponent implements OnInit {
   
   constructor(public cityservice:CitiesService,private router:Router,private ser:AuthService){
   }
-  // ngOnInit(): void {
-  //   this.cityservice.refreshList();
-  // }
   ngOnInit(){
     this.cityservice.refreshList();
-    
   }
  
 }

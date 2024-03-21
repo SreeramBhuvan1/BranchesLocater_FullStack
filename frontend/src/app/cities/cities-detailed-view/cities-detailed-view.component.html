@@ -32,11 +32,11 @@
             <br>
             <div class="grid">
                 <div class="col col-offset-3 ">
-                    <p-button label="Edit" routerLink="edit"></p-button>
+                    <p-button label="Edit" routerLink="edit" (click)="edit(city.cityId)"></p-button>
                 </div>
 
                 <div class="col col-offset-1">
-                    <p-button label="Delete" severity="danger"></p-button>
+                    <p-button label="Delete" severity="danger" (click)="onDelete(city.cityId)"></p-button>
                 </div>
             </div>
         </p-card>

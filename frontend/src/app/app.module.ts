@@ -31,6 +31,8 @@ import { TableModule } from 'primeng/table';
 import { PanelModule } from 'primeng/panel';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
 import { CityStartComponent } from './cities/city-start/city-start.component';
+import { CitiesEditComponent } from './cities/cities-detailed-view/cities-edit/cities-edit.component';
+
 
 
 @NgModule({
@@ -43,7 +45,8 @@ import { CityStartComponent } from './cities/city-start/city-start.component';
     CitiesListComponent,
     CitiesDetailedViewComponent,
     CreateCityComponent,
-    CityStartComponent
+    CityStartComponent,
+    CitiesEditComponent
   ],
   imports: [
     BrowserModule,
