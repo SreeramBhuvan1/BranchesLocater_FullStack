@@ -36,6 +36,7 @@ import { BranchDetailsComponent } from './branches/branch-details/branch-details
 import { BranchEditComponent } from './branches/branch-edit/branch-edit.component';
 import { BranchStartComponent } from './branches/branch-start/branch-start.component';
 import { DropdownModule } from 'primeng/dropdown';
+import { BranchWeatherComponent } from './branches/branch-weather/branch-weather.component';
 
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
@@ -55,7 +56,8 @@ import { ToastModule } from 'primeng/toast';
     BranchListComponent,
     BranchDetailsComponent,
     BranchEditComponent,
-    BranchStartComponent
+    BranchStartComponent,
+    BranchWeatherComponent
   ],
   imports: [
     BrowserModule,

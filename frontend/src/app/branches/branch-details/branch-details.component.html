@@ -41,11 +41,14 @@
                 </tr>
             </table>
             <br>
-            <div class="grid">
-                <div class="col col-offset-2 ">
+            <div class="grid justify-content-center">
+                <div class="col-3" style="display: flex; justify-content: center;">
                     <p-button label="Edit" routerLink="edit"></p-button>
                 </div>
-                <div class="col">
+                <div class="col-5" style="display: flex; justify-content: center;">
+                    <p-button label="See Weather" routerLink="weather"></p-button>
+                </div>
+                <div class="col-3" style="display: flex; justify-content: center;">
                     <p-button label="Delete" severity="danger" (click)="onDelete()"></p-button>
                 </div>
             </div>

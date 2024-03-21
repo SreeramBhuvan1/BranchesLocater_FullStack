@@ -10,6 +10,7 @@ import { CityStartComponent } from './cities/city-start/city-start.component';
 import { BranchStartComponent } from './branches/branch-start/branch-start.component';
 import { BranchEditComponent } from './branches/branch-edit/branch-edit.component';
 import { BranchDetailsComponent } from './branches/branch-details/branch-details.component';
+import { BranchWeatherComponent } from './branches/branch-weather/branch-weather.component';
 
 
 
@@ -21,7 +22,8 @@ const routes: Routes = [
       { path: '', component: BranchStartComponent },
       { path: 'add', component: BranchEditComponent },
       { path: ':id', component: BranchDetailsComponent },
-      { path: ':id/edit', component: BranchEditComponent }
+      { path: ':id/edit', component: BranchEditComponent },
+      { path: ':id/weather', component: BranchWeatherComponent }
     ]
   },
   {
@@ -29,7 +31,7 @@ const routes: Routes = [
       { path: '', component: CityStartComponent },
       { path: 'add', component: CreateCityComponent },
       { path: ':id', component: CitiesDetailedViewComponent },
-      { path: ':id/edit', component: CreateCityComponent }
+      { path: ':id/edit', component: CreateCityComponent },
     ]
   },
   { path: 'auth', component: AuthComponent }
