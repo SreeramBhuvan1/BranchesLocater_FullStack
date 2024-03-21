@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
 import { AuthService, LoginResponse } from './auth.service';
@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
   styleUrl: './auth.component.css'
 })
 export class AuthComponent implements OnInit, OnDestroy {
+  @ViewChild('authForm') form: NgForm;
   isLoginMode = true;
   isLoading = false;
   error: string = null;
@@ -24,6 +25,8 @@ export class AuthComponent implements OnInit, OnDestroy {
         this.user = null;
         this.isLoginMode = true;
         this.error = null;
+        if (this.form !== undefined)
+          this.form.reset();
       }
       else {
         this.user = user;
