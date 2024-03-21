@@ -22,6 +22,7 @@ namespace Task1.Repository
             this._configuration = configuration;
         }
 
+
         public async Task<AuthResponseDto> Login(LoginDto loginDto)
         {
             var user = await _userManager.FindByEmailAsync(loginDto.Email);
@@ -34,6 +35,27 @@ namespace Task1.Repository
             return new AuthResponseDto
             {
                 Token = token,
+                UserId = user.Id
+            };
+        }
+
+        public async Task<AuthResponseDto> ChangePassword(ChangePassowordDto changePassowordDto)
+        {
+            var user = await _userManager.FindByEmailAsync(changePassowordDto.Email);
+            if(user == null)
+            {
+                return null;
+            }
+            var result = await _userManager.ChangePasswordAsync(user,changePassowordDto.OldPassword,changePassowordDto.NewPassword);
+            if (!result.Succeeded)
+            {
+                return null;
+            }
+            user = await _userManager.FindByEmailAsync(changePassowordDto.Email);
+            var token = await GenerateToken(user);
+            return new AuthResponseDto
+            {
+                Token= token,
                 UserId = user.Id
             };
         }

@@ -14,7 +14,7 @@
         background-repeat: no-repeat;
         background-size: cover;
         opacity: 0.75;
-    "></div>
+    " *ngIf="!user"></div>
     <div class="col-12 md:col-4 md:col-offset-4" style="padding: 5%; z-index: 2;">
         <div style="border: 1px solid red; background-color: rgb(226, 163, 163); text-align: center; color: red;"
             *ngIf="error">
@@ -26,9 +26,9 @@
             <p-progressSpinner ariaLabel="loading"></p-progressSpinner>
         </div>
         <form
-            style="padding: 2%; margin-top: 2%; background-color: white; box-shadow: 5px 5px rgb(144, 149, 150); border-radius: 2%; "
+            style="padding: 2%; margin-top: 2%; background-color: white; box-shadow: 5px 5px rgb(144, 149, 150); border:1px solid black; border-radius: 2%; "
             #authForm="ngForm" (ngSubmit)="onSubmit(authForm)" *ngIf="!isLoading">
-            <div class="field">
+            <div class="field" *ngIf="!user">
                 <label for="email">E-Mail</label>
                 <input type="email" id="email"
                     class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
@@ -39,6 +39,18 @@
                 <input type="password" id="password"
                     class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
                     ngModel name="password" required minlength="6">
+            </div>
+            <div class="field" *ngIf="user">
+                <label for="newPassword">New Password</label>
+                <input type="password" id="newPassword"
+                    class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+                    ngModel name="newPassword" required minlength="6">
+            </div>
+            <div class="field" *ngIf="user">
+                <label for="confirmNewPassword">Confirm New Password</label>
+                <input type="password" id="confirmNewPassword"
+                    class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+                    ngModel name="confirmNewPassword" required minlength="6">
             </div>
             <div class="field" *ngIf="!isLoginMode">
                 <label for="confirmPassword">Confirm Password</label>
@@ -59,10 +71,12 @@
                     ngModel name="lastname" required>
             </div>
             <div class="grid justify-content-around" style="margin-top: 2%;">
+                <button class="col-5" pButton type="submit" [disabled]="!authForm.valid" label="Change"
+                    *ngIf="user"></button>
                 <button class="col-5" pButton type="submit" [disabled]="!authForm.valid"
-                    label="{{ isLoginMode ? 'Login' : 'Signup' }}"></button>
+                    label="{{ isLoginMode ? 'Login' : 'Signup' }}" *ngIf="!user"></button>
                 <button class="col-5" pButton (click)="onSwitchMode(authForm)" type="button"
-                    label="{{ isLoginMode ? 'Switch to Signup' : 'Switch to Login' }}"></button>
+                    label="{{ isLoginMode ? 'Switch to Signup' : 'Switch to Login' }}" *ngIf="!user"></button>
             </div>
         </form>
     </div>

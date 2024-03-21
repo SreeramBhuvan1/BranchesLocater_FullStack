@@ -7,5 +7,6 @@ namespace Task1.Contracts
     {
         Task<IEnumerable<IdentityError>> Register(ApiUserDto userDto);
         Task<AuthResponseDto> Login(LoginDto loginDto);
+        Task<AuthResponseDto> ChangePassword(ChangePassowordDto changePassowordDto);
     }
 }
