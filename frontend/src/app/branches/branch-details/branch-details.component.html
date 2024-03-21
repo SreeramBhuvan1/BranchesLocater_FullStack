@@ -1,7 +1,7 @@
 <div class="grid">
 
     <div class="col-11 col-offset-1" *ngIf="Branch">
-        <p-card header="BU Code: {{Branch.bU_Codes}}">
+        <p-card header="BU Code: {{Branch.buCode}}">
             <table style="width: 100%; text-align: center;">
                 <colgroup>
                     <col span="1" style="background-color:lightgrey">
@@ -17,7 +17,7 @@
                 </tr>
                 <tr>
                     <th>Opened Date</th>
-                    <td>{{Branch.opened_dt}}</td>
+                    <td>{{Branch.openedDate}}</td>
                 </tr>
                 <tr>
                     <th>Address</th>
@@ -29,7 +29,7 @@
                 </tr>
                 <tr>
                     <th>Business Hours</th>
-                    <td>{{Branch.business_Hours}}</td>
+                    <td>{{Branch.businessHours}}</td>
                 </tr>
                 <tr>
                     <th>Latitude</th>

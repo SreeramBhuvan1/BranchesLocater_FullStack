@@ -5,10 +5,10 @@
                 <form #form="ngForm" (ngSubmit)="onSubmit(form)">
                     <p-scrollPanel [style]="{ width: '100%', height: '44vh' }">
                         <div class="field">
-                            <label for="bU_Codes">BU Code</label>
-                            <input type="text" id="bU_Codes"
+                            <label for="buCode">BU Code</label>
+                            <input type="text" id="buCode"
                                 class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
-                                ngModel name="bU_Codes" required>
+                                ngModel name="buCode" required>
                         </div>
                         <div class="field">
                             <label for="status">Status</label>
@@ -17,10 +17,10 @@
                                 ngModel name="status" required>
                         </div>
                         <div class="field" *ngIf="!editMode">
-                            <label for="opened_dt">Opened Date</label>
-                            <input type="date" id="opened_dt"
+                            <label for="openedDate">Opened Date</label>
+                            <input type="date" id="openedDate"
                                 class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
-                                ngModel name="opened_dt" required>
+                                ngModel name="openedDate" required>
                         </div>
                         <div class="field">
                             <label for="address">Address</label>
@@ -44,10 +44,10 @@
                                 ngModel name="phone" required>
                         </div>
                         <div class="field">
-                            <label for="business_Hours">Business Hours</label>
-                            <input type="text" id="business_Hours"
+                            <label for="businessHours">Business Hours</label>
+                            <input type="text" id="businessHours"
                                 class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
-                                ngModel name="business_Hours" required>
+                                ngModel name="businessHours" required>
                         </div>
                         <div class="field" *ngIf="!editMode">
                             <label for="latitude">Latitude</label>

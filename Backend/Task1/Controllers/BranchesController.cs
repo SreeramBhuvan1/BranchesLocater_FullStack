@@ -8,6 +8,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Task1.Contracts;
 using Task1.Data;
@@ -98,6 +99,10 @@ namespace Task1.Controllers
                     throw;
                 }
             }
+            catch(Exception) 
+            {
+                return BadRequest("BU Code already exists");
+            }
 
             return NoContent();
         }
@@ -114,7 +119,14 @@ namespace Task1.Controllers
                 return BadRequest("CityId does not exist");
             }
             var branch = _mapper.Map<Branch>(branchdto);
+            try
+            {
             await _branchRepository.AddAsync(branch);
+            }
+            catch(Exception ex)
+            {
+                return BadRequest("BuCode already exists. ");
+            }
 
             return CreatedAtAction("GetBranch", new { id = branch.Id }, branch);
         }

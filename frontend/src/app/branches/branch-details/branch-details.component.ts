@@ -22,13 +22,19 @@ export class BranchDetailsComponent implements OnInit {
   }
 
   onDelete() {
-    console.log(this.Branch.id);
     this.branchService.deleteBranch(this.Branch.id).subscribe({
       next: res => {
         console.log(res);
         alert('Deleted successfully');
         this.branchService.loadBranches();
         this.router.navigate(['branches']);
+      }, error: err => {
+        if (err.status === 403) {
+          alert('You are not an admin');
+        }
+        else {
+          alert('Something went wrong');
+        }
       }
     })
   }

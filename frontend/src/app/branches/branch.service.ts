@@ -14,13 +14,12 @@ export class BranchService {
         this.http.get<Branch[]>('https://localhost:7207/api/Branches').subscribe({
             next: res => {
                 this.Branches = res;
-                console.log(this.Branches);
             }
         })
     }
 
     getBranch(code: string) {
-        var index = this.Branches.findIndex(x => x.bU_Codes === code);
+        var index = this.Branches.findIndex(x => x.buCode === code);
         return this.Branches[index];
     }
 
@@ -36,11 +35,11 @@ export class BranchService {
     updateBranch(Id: number, form: NgForm) {
         return this.http.put('https://localhost:7207/api/Branches/' + Id, {
             id: Id,
-            bU_Codes: form.value.bU_Codes,
+            buCode: form.value.buCode,
             status: form.value.status,
             address: form.value.address,
             phone: form.value.phone,
-            business_Hours: form.value.business_Hours
+            businessHours: form.value.businessHours
         });
     }
 }

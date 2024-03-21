@@ -32,11 +32,11 @@ export class BranchEditComponent implements OnInit, AfterViewInit {
     if (this.editMode) {
       setTimeout(() => {
         this.branchForm.setValue({
-          bU_Codes: this.Branch.bU_Codes,
+          buCode: this.Branch.buCode,
           status: this.Branch.status,
           address: this.Branch.address,
           phone: this.Branch.phone,
-          business_Hours: this.Branch.business_Hours
+          businessHours: this.Branch.businessHours
         })
       });
     }
@@ -49,18 +49,25 @@ export class BranchEditComponent implements OnInit, AfterViewInit {
           alert('updated successfully');
           this.branchService.loadBranches();
           this.router.navigate(['/branches']);
+        }, error: err => {
+          if (err.status === 400) {
+            alert(err.error);
+          }
+          else {
+            alert("Something went wrong");
+          }
         }
       })
     }
     else {
       const branch: CreateBranch = new CreateBranch(
-        this.branchForm.value.bU_Codes,
+        this.branchForm.value.buCode,
         this.branchForm.value.status,
-        this.branchForm.value.opened_dt,
+        this.branchForm.value.openedDate,
         this.branchForm.value.address,
         this.branchForm.value.cityId,
         this.branchForm.value.phone,
-        this.branchForm.value.business_Hours,
+        this.branchForm.value.businessHours,
         this.branchForm.value.latitude,
         this.branchForm.value.longitude
       );
@@ -70,6 +77,13 @@ export class BranchEditComponent implements OnInit, AfterViewInit {
           alert('added successfully');
           this.branchService.loadBranches();
           this.router.navigate(['../'], { relativeTo: this.route });
+        }, error: err => {
+          if (err.status === 400) {
+            alert(err.error);
+          }
+          else {
+            alert("Something went wrong");
+          }
         }
       })
     }
