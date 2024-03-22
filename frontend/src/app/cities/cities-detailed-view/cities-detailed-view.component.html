@@ -36,6 +36,8 @@
                 </div>
 
                 <div class="col col-offset-1">
+                    <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+
                     <p-button label="Delete" severity="danger" (click)="onDelete(city.cityId)"></p-button>
                 </div>
             </div>

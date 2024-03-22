@@ -3,10 +3,12 @@ import { FormGroup, NgForm } from '@angular/forms';
 import { Observable, Subject, of } from 'rxjs';
 import { Injectable, OnInit } from '@angular/core';
 import { CityDetail } from './cities-model';
+import { AppComponent } from '../app.component';
 @Injectable({
     providedIn: 'root'
 })
 export class CitiesService{
+  
 
     public list:CityDetail[]=[];
      bool=false;
@@ -35,16 +37,18 @@ export class CitiesService{
             tempCity[controlName] = form.controls[controlName].value;
             }
         }  
-        this.http.put(this.url+'/'+id,tempCity).subscribe({
-            error: error => {
-                this.bool=true;
-                console.error("An Error Occured", error);
-            }
-        });
-        if(this.bool==false){
-            const index = this.list.findIndex(x => x.cityId === id);
-            this.list[index]=tempCity;
-        }
+        // this.http.put(this.url+'/'+id,tempCity).subscribe({
+        //     error: error => {
+        //         this.bool=true;
+        //         console.error("An Error Occured", error);
+        //        alert("Error occured while updating");
+        //     }
+        // });
+        // if(this.bool==false){
+        //     const index = this.list.findIndex(x => x.cityId === id);
+        //     this.list[index]=tempCity;
+        // }
+        return this.http.put(this.url+'/'+id,tempCity);
     }
     Setvaluesinform(city:CityDetail){
         this.startedediting.next(city);
@@ -63,18 +67,20 @@ export class CitiesService{
     }
     deleteId(id:number){
        
-        this.http.delete(this.url+'/'+id).subscribe({
-            next: () => {
-                const index = this.list.findIndex(x => x.cityId === id);
-                if (index !== -1) {
-                  this.list.splice(index, 1);
-                } else {
-                  console.error("City with ID", id, "not found in the list.");
-                }
-              },
-              error: error => {
-                console.error("City with ID", id, "not found in the list.", error);
-              }
-            });
+        // this.http.delete(this.url+'/'+id).subscribe({
+        //     next: () => {
+        //         const index = this.list.findIndex(x => x.cityId === id);
+        //         if (index !== -1) {
+        //           this.list.splice(index, 1);
+        //         } else {
+        //           console.error("City with ID", id, "not found in the list.");
+        //         }
+        //       },
+        //       error: error => {
+        //         console.error("City with ID", id, "not found in the list.", error);
+        //         alert("Error Occured While Deleting the Data");
+        //       }
+        //     });
+        return this.http.delete(this.url+'/'+id);
     }
 }

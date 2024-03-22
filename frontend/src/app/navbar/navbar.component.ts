@@ -19,7 +19,7 @@ export class NavbarComponent {
         label: 'Branches', routerLink: ['/branches']
       },
       {
-        label: 'Countries', routerLink: ['/cities']
+        label: 'Cities', routerLink: ['/cities']
       }
     ];
   }

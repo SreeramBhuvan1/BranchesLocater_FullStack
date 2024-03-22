@@ -7,7 +7,7 @@ import { canActivate, canActivate2 } from './auth/auth.guard';
 import { CreateCityComponent } from './cities/create-city/create-city.component';
 import { CitiesDetailedViewComponent } from './cities/cities-detailed-view/cities-detailed-view.component';
 import { CityStartComponent } from './cities/city-start/city-start.component';
-import { CitiesEditComponent } from './cities/cities-detailed-view/cities-edit/cities-edit.component';
+
 
 
 
@@ -22,7 +22,6 @@ const routes: Routes = [
   ]},
   { path: 'auth', component: AuthComponent }
 ];
-
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]

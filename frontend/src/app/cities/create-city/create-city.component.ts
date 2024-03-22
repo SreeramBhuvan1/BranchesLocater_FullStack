@@ -4,6 +4,8 @@ import { CityDetail } from '../../shared-sources/cities-model';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { ConfirmationService, ConfirmEventType, Message, PrimeNGConfig } from 'primeng/api';
+import { AppComponent } from '../../app.component';
 
 @Component({
   selector: 'app-create-city',
@@ -13,11 +15,14 @@ import { Subscription } from 'rxjs';
 export class CreateCityComponent implements OnInit,AfterViewInit{
  @ViewChild('form') tempform:NgForm;
  id:number;
+ accepted_add=false;
+ msgs: Message[] = [];
  city:CityDetail;
+ temp:CityDetail;
 //  tempcity:CityDetail;
  editMode=false;
 //  tempcity:CityDetail;
-  constructor(public service:CitiesService,private router:Router,private activeroute:ActivatedRoute){}
+  constructor(private  appservice:AppComponent,public service:CitiesService,private router:Router,private activeroute:ActivatedRoute,private confirmationService: ConfirmationService, private primengConfig: PrimeNGConfig){}
   ngOnInit() {
   //  this.service.startedediting.subscribe((tempcity:CityDetail)=>{
   //   this.editMode=true;
@@ -28,6 +33,7 @@ export class CreateCityComponent implements OnInit,AfterViewInit{
     this.id = +params['id'];
     this.editMode = params['id']!=null;
   });
+  this.primengConfig.ripple = true;
   }
   ngAfterViewInit(): void {
     if(this.editMode){
@@ -40,16 +46,81 @@ export class CreateCityComponent implements OnInit,AfterViewInit{
   }
   onSubmit(form:NgForm){
     if(this.editMode){
-      this.service.UpdateCity(this.id,form);
+      this.confirmationService.confirm({
+        message: 'Are you sure that you want to Update?',
+        header: 'Confirmation',
+        icon: 'pi pi-exclamation-triangle',
+        accept: () => {
+            this.service.UpdateCity(this.id,form).subscribe({
+              next:res=>{
+                const tempCity: CityDetail = {...{ cityId: this.id }} as CityDetail;
+                for (const controlName in form.controls) {
+                    if (form.controls[controlName].value) {
+                    tempCity[controlName] = form.controls[controlName].value;
+                    }
+                }
+            const index = this.service.list.findIndex(x => x.cityId === this.id);
+            this.service.list[index]=tempCity;
+            this.appservice.updatetoast();
+              },
+              error:err=>{
+                console.log(err)
+              this.appservice.errorwhileadd();
+            }
+            });
+            
+        },
+        reject: (type) => {
+            switch(type) {
+                case ConfirmEventType.REJECT:
+                    //this.messageService.add({severity:'error', summary:'Rejected', detail:'You have rejected'});
+                    this.appservice.rejected();
+                break;
+                case ConfirmEventType.CANCEL:
+                    //this.messageService.add({severity:'warn', summary:'Cancelled', detail:'You have cancelled'});
+                    this.appservice.cancelled();
+                break;
+            }
+        }
+    });
     }
     else{
-    this.service.postdetails(form.value).subscribe({
-      next:res=>{
-       this.service.list=res as CityDetail[];
-       this.tempform.form.reset();
-        this.router.navigate(['../cities'],{relativeTo:this.activeroute});
-      },
-      error:err=>{console.log(err)}
+      
+      this.confirmationService.confirm({
+        message: 'Are you sure that you want to add this data?',
+        header: 'Confirmation',
+        icon: 'pi pi-exclamation-triangle',
+        accept: () => {
+          this.service.postdetails(form.value).subscribe({
+            next:res=>{
+             this.service.list=res as CityDetail[];
+             this.tempform.form.reset();
+             this.accepted_add=true;
+              this.router.navigate(['../'],{relativeTo:this.activeroute});
+              this.appservice.addedtoast();
+              
+            },
+            error:err=>{
+              console.log(err)
+            this.appservice.errorwhileadd();
+          }
+          });
+        },
+        reject: (type) => {
+          this.temp=this.service.getCity(this.id);
+          this.tempform.setValue({cityName:this.temp.cityName,state:this.temp.state,country:this.temp.country,currency:this.temp.currency});
+          
+            switch(type) {
+                case ConfirmEventType.REJECT:
+                    //this.messageService.add({severity:'error', summary:'Rejected', detail:'You have rejected'});
+                    this.appservice.rejected();
+                break;
+                case ConfirmEventType.CANCEL:
+                    //this.messageService.add({severity:'warn', summary:'Cancelled', detail:'You have cancelled'});
+                    this.appservice.cancelled();
+                break;
+            }
+        }
     });
    }
   }

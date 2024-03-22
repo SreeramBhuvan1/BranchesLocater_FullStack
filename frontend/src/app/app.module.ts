@@ -31,10 +31,11 @@ import { TableModule } from 'primeng/table';
 import { PanelModule } from 'primeng/panel';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
 import { CityStartComponent } from './cities/city-start/city-start.component';
-import { CitiesEditComponent } from './cities/cities-detailed-view/cities-edit/cities-edit.component';
 
-
-
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {ConfirmationService} from 'primeng/api';
+import{MessageService} from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,8 +46,7 @@ import { CitiesEditComponent } from './cities/cities-detailed-view/cities-edit/c
     CitiesListComponent,
     CitiesDetailedViewComponent,
     CreateCityComponent,
-    CityStartComponent,
-    CitiesEditComponent
+    CityStartComponent
   ],
   imports: [
     BrowserModule,
@@ -61,6 +61,7 @@ import { CitiesEditComponent } from './cities/cities-detailed-view/cities-edit/c
     ToolbarModule,
     AccordionModule,
     ButtonModule,
+    ConfirmDialogModule,
     ListboxModule,
     MessagesModule,
     ProgressSpinnerModule,
@@ -69,9 +70,10 @@ import { CitiesEditComponent } from './cities/cities-detailed-view/cities-edit/c
     CardModule,
     FieldsetModule,
     TableModule,
-    PanelModule
+    PanelModule,
+    ToastModule
   ],
-  providers: [CitiesService, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }],
+  providers: [CitiesService,ConfirmationService,MessageService, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
