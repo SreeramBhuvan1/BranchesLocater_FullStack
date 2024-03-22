@@ -1,51 +1,52 @@
+
+
 <div class="grid">
     <div class="col-8 col-offset-2">
+        
         <p-card>
             <p-panel header="Add City Details">
-                <form #form="ngForm" (submit)="onSubmit(form)">
+                <form #form="ngForm" (ngSubmit)="onSubmit(form)">
                     <div class="grid">
                         <div class="col-12">
                             <div class="flex flex-column gap-2">
                                 <label for="cityname">City</label>
-                                <input pInputText id="cityname" name="cityname" aria-describedby="username-help" [(ngModel)]="service.formdata.cityName" [ngModelOptions]="{standalone: true}"/>
-                            
+                                <input pInputText id="cityName" name="cityName" aria-describedby="username-help" ngModel required/>
                             </div>
                         </div>
-                        
                         <div class="col-12">
                             <div class="flex flex-column gap-2">
                                 <label for="statename">State</label>
-                                <input pInputText id="statename" name="statename" aria-describedby="username-help" [(ngModel)]="service.formdata.state" [ngModelOptions]="{standalone: true}"/>
-                                
+                                <input pInputText id="state" name="state" aria-describedby="username-help" ngModel required/>
                             </div>
                         </div>
                         <br>
                         <div class="col-12">
                             <div class="flex flex-column gap-2">
                                 <label for="countryname">Country</label>
-                                <input pInputText id="countryname" name="countryname" aria-describedby="username-help"  [(ngModel)]="service.formdata.country" [ngModelOptions]="{standalone: true}"/>
-                                
+                                <input pInputText id="country" name="country" aria-describedby="username-help" ngModel required/>
                             </div>
                         </div>
                         <br>
                         <div class="col-12">
                             <div class="flex flex-column gap-2">
                                 <label for="currency">Currency</label>
-                                <input pInputText id="currency"  name="currency" aria-describedby="username-help" [(ngModel)]="service.formdata.currency" [ngModelOptions]="{standalone: true}"/>
+                                <input pInputText id="currency"  name="currency" aria-describedby="username-help" ngModel required/>
                             </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="grid justify-content-around">
+                        <div class="col-4 md:col-offset-2">
+                            <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+
+                            <button type="button" [disabled]="!form.valid" pButton pRipple   class="p-button-success mb-2" (click)="onSubmit(form)">{{editMode? "Update" :"add"}}</button>
+                        </div>
+                        <div class="col-6">
+                            <p-button  severity="danger" routerLink="../">Discard</p-button>
                         </div>
                     </div>
                 </form>
             </p-panel>
-            <br>
-            <div class="grid">
-                <div class="col col-offset-3 ">
-                    <p-button label="Add" routerLink="../"></p-button>
-                </div>
-                <div class="col col-offset-1">
-                    <p-button label="Discard" severity="danger" routerLink="../"></p-button>
-                </div>
-            </div>
         </p-card>
     </div>
 </div>

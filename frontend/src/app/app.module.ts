@@ -32,7 +32,10 @@ import { PanelModule } from 'primeng/panel';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
 import { CityStartComponent } from './cities/city-start/city-start.component';
 
-
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {ConfirmationService} from 'primeng/api';
+import{MessageService} from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,6 +61,7 @@ import { CityStartComponent } from './cities/city-start/city-start.component';
     ToolbarModule,
     AccordionModule,
     ButtonModule,
+    ConfirmDialogModule,
     ListboxModule,
     MessagesModule,
     ProgressSpinnerModule,
@@ -66,9 +70,10 @@ import { CityStartComponent } from './cities/city-start/city-start.component';
     CardModule,
     FieldsetModule,
     TableModule,
-    PanelModule
+    PanelModule,
+    ToastModule
   ],
-  providers: [CitiesService, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }],
+  providers: [CitiesService,ConfirmationService,MessageService, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
