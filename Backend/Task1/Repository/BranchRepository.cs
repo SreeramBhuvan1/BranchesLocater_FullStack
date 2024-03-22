@@ -19,7 +19,7 @@ namespace Task1.Repository
 
         public async Task<Branch> GetByBuCode(string code)
         {
-            return await _context.Branches.Include(q => q.City).FirstOrDefaultAsync(q => q.BU_Codes == code);
+            return await _context.Branches.Include(q => q.City).FirstOrDefaultAsync(q => q.BuCode == code);
         }
     }
 }

@@ -1,0 +1,57 @@
+<div class="grid">
+
+    <div class="col-11 col-offset-1" *ngIf="Branch">
+        <p-card header="BU Code: {{Branch.buCode}}">
+            <table style="width: 100%; text-align: center;">
+                <colgroup>
+                    <col span="1" style="background-color:lightgrey">
+                </colgroup>
+                <tr>
+                    <th colspan="2">
+                        Branch Information
+                    </th>
+                </tr>
+                <tr>
+                    <th style="width: 40%;">Status</th>
+                    <td>{{Branch.status}}</td>
+                </tr>
+                <tr>
+                    <th>Opened Date</th>
+                    <td>{{Branch.openedDate}}</td>
+                </tr>
+                <tr>
+                    <th>Address</th>
+                    <td>{{Branch.address}}</td>
+                </tr>
+                <tr>
+                    <th>Phone</th>
+                    <td>{{Branch.phone}}</td>
+                </tr>
+                <tr>
+                    <th>Business Hours</th>
+                    <td>{{Branch.businessHours}}</td>
+                </tr>
+                <tr>
+                    <th>Latitude</th>
+                    <td>{{Branch.latitude}}</td>
+                </tr>
+                <tr>
+                    <th>Longitude</th>
+                    <td>{{Branch.longitude}}</td>
+                </tr>
+            </table>
+            <br>
+            <div class="grid justify-content-center">
+                <div class="col-3" style="display: flex; justify-content: center;">
+                    <p-button label="Edit" routerLink="edit"></p-button>
+                </div>
+                <div class="col-5" style="display: flex; justify-content: center;">
+                    <p-button label="See Weather" routerLink="weather"></p-button>
+                </div>
+                <div class="col-3" style="display: flex; justify-content: center;">
+                    <p-button label="Delete" severity="danger" (click)="onDelete()"></p-button>
+                </div>
+            </div>
+        </p-card>
+    </div>
+</div>

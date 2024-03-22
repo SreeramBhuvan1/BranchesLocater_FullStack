@@ -4,7 +4,7 @@ import { Router } from "@angular/router";
 import { BehaviorSubject, tap } from "rxjs";
 
 export class User {
-    constructor(public userId: string, public token: string) { }
+    constructor(public email: string, public userId: string, public token: string) { }
 }
 export interface LoginResponse {
     userId: string,
@@ -21,7 +21,7 @@ export class AuthService {
             email: email,
             password: password
         }).pipe(tap(resData => {
-            const user = new User(resData.userId, resData.token);
+            const user = new User(email, resData.userId, resData.token);
             this.user.next(user);
             localStorage.setItem('userData', JSON.stringify(user));
         }));
@@ -29,13 +29,14 @@ export class AuthService {
 
     autoLogin() {
         const userData: {
+            email: string,
             userId: string,
             token: string
         } = JSON.parse(localStorage.getItem('userData'));
         if (!userData) {
             return;
         }
-        const loadedUser = new User(userData.userId, userData.token);
+        const loadedUser = new User(userData.email, userData.userId, userData.token);
         this.user.next(loadedUser);
     }
 
@@ -52,5 +53,17 @@ export class AuthService {
             firstname: firstname,
             lastname: lastname
         });
+    }
+    changePassword(password: string, newPassword: string) {
+        const email = JSON.parse(localStorage.getItem('userData')).email;
+        return this.http.post<LoginResponse>('https://localhost:7207/api/Account/changepassword', {
+            email: email,
+            oldPassword: password,
+            newPassword: newPassword,
+        }).pipe(tap(resData => {
+            const user = new User(email, resData.userId, resData.token);
+            this.user.next(user);
+            localStorage.setItem('userData', JSON.stringify(user));
+        }));
     }
 }

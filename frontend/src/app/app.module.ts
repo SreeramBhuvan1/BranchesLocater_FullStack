@@ -31,10 +31,16 @@ import { TableModule } from 'primeng/table';
 import { PanelModule } from 'primeng/panel';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
 import { CityStartComponent } from './cities/city-start/city-start.component';
+import { BranchListComponent } from './branches/branch-list/branch-list.component';
+import { BranchDetailsComponent } from './branches/branch-details/branch-details.component';
+import { BranchEditComponent } from './branches/branch-edit/branch-edit.component';
+import { BranchStartComponent } from './branches/branch-start/branch-start.component';
+import { DropdownModule } from 'primeng/dropdown';
+import { BranchWeatherComponent } from './branches/branch-weather/branch-weather.component';
 
-import {ConfirmDialogModule} from 'primeng/confirmdialog';
-import {ConfirmationService} from 'primeng/api';
-import{MessageService} from 'primeng/api';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
+import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 @NgModule({
   declarations: [
@@ -46,7 +52,12 @@ import { ToastModule } from 'primeng/toast';
     CitiesListComponent,
     CitiesDetailedViewComponent,
     CreateCityComponent,
-    CityStartComponent
+    CityStartComponent,
+    BranchListComponent,
+    BranchDetailsComponent,
+    BranchEditComponent,
+    BranchStartComponent,
+    BranchWeatherComponent
   ],
   imports: [
     BrowserModule,
@@ -71,9 +82,10 @@ import { ToastModule } from 'primeng/toast';
     FieldsetModule,
     TableModule,
     PanelModule,
-    ToastModule
+    ToastModule,
+    DropdownModule
   ],
-  providers: [CitiesService,ConfirmationService,MessageService, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }],
+  providers: [CitiesService, ConfirmationService, MessageService, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Task1.Contracts;
 using Task1.Models.User;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Task1.Controllers
 {
@@ -50,6 +51,21 @@ namespace Task1.Controllers
             }
             return Ok(authResponse);
 
+        }
+
+        [HttpPost]
+        [Route("changepassword")]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult> ChangePassword(ChangePassowordDto changePassowordDto)
+        {
+            var changePasswordResoponse = await _authManager.ChangePassword(changePassowordDto);
+            if (changePasswordResoponse == null)
+            {
+                return Unauthorized();
+            }
+            return Ok(changePasswordResoponse);
         }
     }
 }
