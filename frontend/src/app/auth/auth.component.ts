@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
 import { AuthService, LoginResponse } from './auth.service';
 import { Router } from '@angular/router';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-auth',
@@ -17,7 +18,7 @@ export class AuthComponent implements OnInit, OnDestroy {
   user = null;
   sub: Subscription;
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private appService: AppComponent, private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     this.sub = this.authService.user.subscribe(user => {
@@ -54,17 +55,19 @@ export class AuthComponent implements OnInit, OnDestroy {
       this.authService.login(form.value.email, form.value.password).subscribe(resData => {
         console.log(resData);
         this.error = null;
-        alert('login successfully');
+        this.appService.customSuccess('Logged In Successfully');
         this.router.navigate(['/branches']);
       }, errorResp => {
         if (errorResp.error.status === 401) {
           this.error = 'Incorrect credentials'
+          this.appService.customError(this.error);
         }
       });
     }
     else if (!this.isLoginMode && !this.user) {
       if (form.value.password !== form.value.confirmPassword) {
         this.error = 'Passwords did not match';
+        this.appService.customError(this.error);
         this.isLoading = false;
         return;
       }
@@ -72,7 +75,7 @@ export class AuthComponent implements OnInit, OnDestroy {
         next: resData => {
           console.log(resData);
           this.error = null;
-          alert('Sign up was successful! Please Login to proceed');
+          this.appService.customSuccess('Sign up was successful! Please Login to proceed');
           this.isLoginMode = true;
           form.reset();
         }, error: errorRes => {
@@ -82,12 +85,15 @@ export class AuthComponent implements OnInit, OnDestroy {
             this.error = errorRes.error.DuplicateUserName;
           if (errorRes.status === 500)
             this.error = 'Internal server error. Please try again later'
+
+          this.appService.customError(this.error);
         }
       });
     }
     else {
       if (form.value.newPassword !== form.value.confirmNewPassword) {
         this.error = 'Please enter same passoword for Confirm New Passoword field';
+        this.appService.customError(this.error);
         this.isLoading = false;
         return;
       }
@@ -96,12 +102,14 @@ export class AuthComponent implements OnInit, OnDestroy {
           console.log(resData);
           this.error = null;
           this.router.navigate(['/branches']);
-          alert('Password Changed Successfully');
+          this.appService.customSuccess('Password Changed Successfully');
         }, error: errorRes => {
           console.log(errorRes);
           this.error = 'Something went wrong. Make sure you entered correct current password. New Password must contain one uppercase, one lowercase and one non-alphanumeric';
           if (errorRes.status === 500)
             this.error = 'Internal server error. Please try again later'
+
+          this.appService.customError(this.error);
         }
       });
     }

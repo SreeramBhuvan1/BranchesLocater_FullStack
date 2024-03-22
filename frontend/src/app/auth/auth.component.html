@@ -16,12 +16,12 @@
         opacity: 0.75;
     " *ngIf="!user"></div>
     <div class="col-12 md:col-4 md:col-offset-4" style="padding: 5%; z-index: 2;">
-        <div style="border: 1px solid red; background-color: rgb(226, 163, 163); text-align: center; color: red;"
+        <!-- <div style="border: 1px solid red; background-color: rgb(226, 163, 163); text-align: center; color: red;"
             *ngIf="error">
             <p>
                 {{error}}
             </p>
-        </div>
+        </div> -->
         <div *ngIf="isLoading" style="text-align: center;">
             <p-progressSpinner ariaLabel="loading"></p-progressSpinner>
         </div>

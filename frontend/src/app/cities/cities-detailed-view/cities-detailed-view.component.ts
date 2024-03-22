@@ -12,58 +12,64 @@ import { AppComponent } from '../../app.component';
   styleUrl: './cities-detailed-view.component.css'
 })
 
-export class CitiesDetailedViewComponent implements OnInit{
-  id:number;
- city:CityDetail;
- cities:CityDetail[]=[];
+export class CitiesDetailedViewComponent implements OnInit {
+  id: number;
+  city: CityDetail;
+  cities: CityDetail[] = [];
 
-  constructor(private appservice:AppComponent,private service: CitiesService,private router:Router,private activeroute:ActivatedRoute,private confirmationService: ConfirmationService, private messageService: MessageService){
+  constructor(private appservice: AppComponent, private service: CitiesService, private router: Router, private activeroute: ActivatedRoute, private confirmationService: ConfirmationService, private messageService: MessageService) {
   }
   ngOnInit(): void {
     console.log("hi");
-    
-    this.activeroute.params.subscribe((params:Params)=>{
-      this.id=+params['id'];
-      this.city=this.service.getCity(this.id);
+
+    this.activeroute.params.subscribe((params: Params) => {
+      this.id = +params['id'];
+      this.city = this.service.getCity(this.id);
     }
     );
   }
-  edit(id:number){
+  edit(id: number) {
     this.service.Setvaluesinform(this.city);
-    this.router.navigate(['../', id, 'edit'],{relativeTo:this.activeroute});
+    this.router.navigate(['../', id, 'edit'], { relativeTo: this.activeroute });
   }
-  onDelete(id:number){
+  onDelete(id: number) {
     this.confirmationService.confirm({
       message: 'Are you sure that you want to Delete?',
       header: 'Confirmation',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.service.deleteId(id).subscribe({
-          next:res=>{
+          next: res => {
             const index = this.service.list.findIndex(x => x.cityId === id);
-                if (index !== -1) {
-                  this.service.list.splice(index, 1);
-                } else {
-                  console.error("City with ID", id, "not found in the list.");
-                }
+            if (index !== -1) {
+              this.service.list.splice(index, 1);
+            } else {
+              console.error("City with ID", id, "not found in the list.");
+            }
+            this.appservice.deletedtoast();
+            this.router.navigate(['../',], { relativeTo: this.activeroute });
+          },
+          error: err => {
+            if (err.status === 403)
+              this.appservice.customError('You are not an admin');
+            else
+              this.appservice.customError('Something went wrong');
           }
         });
-        this.appservice.deletedtoast();
-        this.router.navigate(['../',],{relativeTo:this.activeroute});
       },
       reject: (type) => {
-          switch(type) {
-              case ConfirmEventType.REJECT:
-                this.appservice.rejected();
-           
-              break;
-              case ConfirmEventType.CANCEL:
-                this.appservice.cancelled();
-                 
-              break;
-          }
+        switch (type) {
+          case ConfirmEventType.REJECT:
+            this.appservice.rejected();
+
+            break;
+          case ConfirmEventType.CANCEL:
+            this.appservice.cancelled();
+
+            break;
+        }
       }
-  });
+    });
   }
 }
 

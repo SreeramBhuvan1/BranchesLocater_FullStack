@@ -1,7 +1,8 @@
-<p-menubar>
+<p-menubar
+  [style]="{'background-color': 'rgb(33,101,226)', 'border': '2px solid rgb(33,101,226)', 'border-radius': '0'}">
   <ng-template pTemplate="start">
     <div class="container">
-      <h3> Fastenal</h3>
+      <h3 style="color: white;"> Fastenal</h3>
       <p-tabMenu [scrollable]="true" [model]="items" [activeItem]="activeItem"></p-tabMenu>
 
     </div>

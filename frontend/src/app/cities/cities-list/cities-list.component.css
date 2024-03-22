@@ -1,3 +1,10 @@
-a{
+a {
     text-decoration: none;
+}
+
+:host {
+    ::ng-deep .active {
+        background-color: rgb(33, 101, 226);
+        color: white;
+    }
 }

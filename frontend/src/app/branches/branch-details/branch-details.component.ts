@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Branch } from '../branch.model';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { BranchService } from '../branch.service';
+import { AppComponent } from '../../app.component';
+import { ConfirmEventType, ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'app-branch-details',
@@ -12,7 +14,7 @@ export class BranchDetailsComponent implements OnInit {
   code: string;
   Branch: Branch;
 
-  constructor(private route: ActivatedRoute, private branchService: BranchService, private router: Router) { }
+  constructor(private confirmationService: ConfirmationService, private appService: AppComponent, private route: ActivatedRoute, private branchService: BranchService, private router: Router) { }
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
@@ -22,20 +24,38 @@ export class BranchDetailsComponent implements OnInit {
   }
 
   onDelete() {
-    this.branchService.deleteBranch(this.Branch.id).subscribe({
-      next: res => {
-        console.log(res);
-        alert('Deleted successfully');
-        this.branchService.loadBranches();
-        this.router.navigate(['branches']);
-      }, error: err => {
-        if (err.status === 403) {
-          alert('You are not an admin');
-        }
-        else {
-          alert('Something went wrong');
+    console.log("hello")
+    this.confirmationService.confirm({
+      message: 'Are you sure that you want to delete this data?',
+      header: 'Confirmation',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.branchService.deleteBranch(this.Branch.id).subscribe({
+          next: res => {
+            console.log(res);
+            this.appService.deletedtoast();
+            this.branchService.loadBranches();
+            this.router.navigate(['branches']);
+          }, error: err => {
+            if (err.status === 403) {
+              this.appService.customError('You are not an admin');
+            }
+            else {
+              this.appService.customError('Something went wrong');
+            }
+          }
+        })
+      },
+      reject: (type) => {
+        switch (type) {
+          case ConfirmEventType.REJECT:
+            this.appService.rejected();
+            break;
+          case ConfirmEventType.CANCEL:
+            this.appService.cancelled();
+            break;
         }
       }
-    })
+    });
   }
 }

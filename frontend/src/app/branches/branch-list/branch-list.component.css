@@ -1,4 +1,6 @@
-.active {
-    background-color: rgb(104, 103, 105);
-    border-radius: 10px;
+:host {
+    ::ng-deep .active {
+        background-color: rgb(33, 101, 226);
+        color: white;
+    }
 }
