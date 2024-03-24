@@ -4,6 +4,8 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { BranchService } from '../branch.service';
 import { AppComponent } from '../../app.component';
 import { ConfirmEventType, ConfirmationService } from 'primeng/api';
+import { CityDetail } from '../../shared-sources/cities-model';
+import { CitiesService } from '../../shared-sources/cities-service';
 
 @Component({
   selector: 'app-branch-details',
@@ -13,13 +15,15 @@ import { ConfirmEventType, ConfirmationService } from 'primeng/api';
 export class BranchDetailsComponent implements OnInit {
   code: string;
   Branch: Branch;
+  city: CityDetail;
 
-  constructor(private confirmationService: ConfirmationService, private appService: AppComponent, private route: ActivatedRoute, private branchService: BranchService, private router: Router) { }
+  constructor(private confirmationService: ConfirmationService, private appService: AppComponent, private route: ActivatedRoute, private branchService: BranchService, private cityService: CitiesService, private router: Router) { }
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
       this.code = params['id'];
       this.Branch = this.branchService.getBranch(this.code);
+      this.city = this.cityService.getCity(this.Branch.cityId);
     })
   }
 
