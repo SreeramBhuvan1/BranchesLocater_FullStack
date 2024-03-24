@@ -74,11 +74,9 @@ export class CreateCityComponent implements OnInit, AfterViewInit {
         reject: (type) => {
           switch (type) {
             case ConfirmEventType.REJECT:
-              //this.messageService.add({severity:'error', summary:'Rejected', detail:'You have rejected'});
               this.appservice.rejected();
               break;
             case ConfirmEventType.CANCEL:
-              //this.messageService.add({severity:'warn', summary:'Cancelled', detail:'You have cancelled'});
               this.appservice.cancelled();
               break;
           }
@@ -107,16 +105,12 @@ export class CreateCityComponent implements OnInit, AfterViewInit {
           });
         },
         reject: (type) => {
-          this.temp = this.service.getCity(this.id);
-          this.tempform.setValue({ cityName: this.temp.cityName, state: this.temp.state, country: this.temp.country, currency: this.temp.currency });
 
           switch (type) {
             case ConfirmEventType.REJECT:
-              //this.messageService.add({severity:'error', summary:'Rejected', detail:'You have rejected'});
               this.appservice.rejected();
               break;
             case ConfirmEventType.CANCEL:
-              //this.messageService.add({severity:'warn', summary:'Cancelled', detail:'You have cancelled'});
               this.appservice.cancelled();
               break;
           }

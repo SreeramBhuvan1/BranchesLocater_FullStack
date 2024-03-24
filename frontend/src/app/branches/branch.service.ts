@@ -28,7 +28,6 @@ export class BranchService {
     }
 
     deleteBranch(Id: number) {
-        console.log(Id);
         return this.http.delete('https://localhost:7207/api/Branches/' + Id);
     }
 

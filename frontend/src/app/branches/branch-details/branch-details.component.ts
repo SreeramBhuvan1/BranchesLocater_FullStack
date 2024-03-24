@@ -24,7 +24,6 @@ export class BranchDetailsComponent implements OnInit {
   }
 
   onDelete() {
-    console.log("hello")
     this.confirmationService.confirm({
       message: 'Are you sure that you want to delete this data?',
       header: 'Confirmation',
@@ -32,7 +31,6 @@ export class BranchDetailsComponent implements OnInit {
       accept: () => {
         this.branchService.deleteBranch(this.Branch.id).subscribe({
           next: res => {
-            console.log(res);
             this.appService.deletedtoast();
             this.branchService.loadBranches();
             this.router.navigate(['branches']);

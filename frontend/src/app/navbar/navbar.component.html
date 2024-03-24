@@ -2,13 +2,13 @@
   [style]="{'background-color': 'rgb(33,101,226)', 'border': '2px solid rgb(33,101,226)', 'border-radius': '0'}">
   <ng-template pTemplate="start">
     <div class="container">
-      <h3 style="color: white;"> Fastenal</h3>
+      <h3 style="color: white; margin-left: 5%;">Fastenal</h3>
       <p-tabMenu [scrollable]="true" [model]="items" [activeItem]="activeItem"></p-tabMenu>
 
     </div>
   </ng-template>
   <ng-template pTemplate="end">
-    <div style="display: flex; gap: 1px;">
+    <div style="display: flex; gap: 5px;">
       <p-button routerLink="/auth">Change Password</p-button>
       <p-button severity="danger" (click)="onLogout()"> Logout</p-button>
     </div>

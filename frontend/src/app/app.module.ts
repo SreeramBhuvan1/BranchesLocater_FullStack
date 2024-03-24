@@ -37,7 +37,7 @@ import { BranchEditComponent } from './branches/branch-edit/branch-edit.componen
 import { BranchStartComponent } from './branches/branch-start/branch-start.component';
 import { DropdownModule } from 'primeng/dropdown';
 import { BranchWeatherComponent } from './branches/branch-weather/branch-weather.component';
-
+import { PasswordModule } from 'primeng/password';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api';
@@ -83,7 +83,8 @@ import { ToastModule } from 'primeng/toast';
     TableModule,
     PanelModule,
     ToastModule,
-    DropdownModule
+    DropdownModule,
+    PasswordModule
   ],
   providers: [CitiesService, ConfirmationService, MessageService, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }],
   bootstrap: [AppComponent]

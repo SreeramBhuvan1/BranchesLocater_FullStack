@@ -16,12 +16,6 @@
         opacity: 0.75;
     " *ngIf="!user"></div>
     <div class="col-12 md:col-4 md:col-offset-4" style="padding: 5%; z-index: 2;">
-        <!-- <div style="border: 1px solid red; background-color: rgb(226, 163, 163); text-align: center; color: red;"
-            *ngIf="error">
-            <p>
-                {{error}}
-            </p>
-        </div> -->
         <div *ngIf="isLoading" style="text-align: center;">
             <p-progressSpinner ariaLabel="loading"></p-progressSpinner>
         </div>
@@ -34,29 +28,29 @@
                     class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
                     ngModel name="email" required email>
             </div>
-            <div class="field">
+            <div class="field" style="display: flex; flex-direction: column;">
                 <label for="password">Password</label>
-                <input type="password" id="password"
-                    class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
-                    ngModel name="password" required minlength="6">
+                <p-password type="password" id="password" [toggleMask]="true" [feedback]="!isLoginMode && !user"
+                    class="text-base text-color surface-overlay w-full" ngModel name="password" required
+                    [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" minlength="6"></p-password>
             </div>
-            <div class="field" *ngIf="user">
+            <div class="field" style="display: flex; flex-direction: column;" *ngIf="user">
                 <label for="newPassword">New Password</label>
-                <input type="password" id="newPassword"
-                    class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
-                    ngModel name="newPassword" required minlength="6">
+                <p-password type="password" id="newPassword" [toggleMask]="true"
+                    class="text-base text-color surface-overlay w-full" ngModel name="newPassword" required
+                    [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" minlength="6"></p-password>
             </div>
-            <div class="field" *ngIf="user">
+            <div class="field" style="display: flex; flex-direction: column;" *ngIf="user">
                 <label for="confirmNewPassword">Confirm New Password</label>
-                <input type="password" id="confirmNewPassword"
-                    class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
-                    ngModel name="confirmNewPassword" required minlength="6">
+                <p-password type="password" id="confirmNewPassword" [toggleMask]="true" [feedback]="false"
+                    class="text-base text-color surface-overlay w-full" ngModel name="confirmNewPassword" required
+                    [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" minlength="6"></p-password>
             </div>
-            <div class="field" *ngIf="!isLoginMode">
+            <div class="field" style="display: flex; flex-direction: column;" *ngIf="!isLoginMode">
                 <label for="confirmPassword">Confirm Password</label>
-                <input type="password" id="confirmPassword"
-                    class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
-                    ngModel name="confirmPassword" required minlength="6">
+                <p-password type="password" id="confirmPassword" [toggleMask]="true" [feedback]="false"
+                    class="text-base text-color surface-overlay w-full" ngModel name="confirmPassword" required
+                    [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" minlength="6"></p-password>
             </div>
             <div class="field" *ngIf="!isLoginMode">
                 <label for="firstname">First Name</label>
