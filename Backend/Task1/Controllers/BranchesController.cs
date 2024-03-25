@@ -133,7 +133,7 @@ namespace Task1.Controllers
 
         // DELETE: api/Branches/5
         [HttpDelete("{id}")]
-        [Authorize(Roles ="Administrator")]
+        [Authorize]
         public async Task<IActionResult> DeleteBranch(int id)
         {
             var branch = await _branchRepository.GetAsync(id);

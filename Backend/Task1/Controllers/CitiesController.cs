@@ -132,7 +132,7 @@ namespace Task1.Controllers
 
         // DELETE: api/Cities/5
         [HttpDelete("{id}")]
-        [Authorize(Roles ="Administrator")]
+        [Authorize]
         public async Task<IActionResult> DeleteCity(int id)
         {
             var city = await _cityRepository.GetAsync(id);

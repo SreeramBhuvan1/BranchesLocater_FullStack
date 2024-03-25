@@ -1,8 +1,10 @@
 <p-menubar
-  [style]="{'background-color': 'rgb(33,101,226)', 'border': '2px solid rgb(33,101,226)', 'border-radius': '0'}">
+  [style]="{'background-color': 'rgb(33,101,226)', 'border': '2px solid rgb(33,101,226)', 'border-radius': '0', 'height': '11vh'}">
   <ng-template pTemplate="start">
     <div class="container">
-      <h3 style="color: white; margin-left: 5%;">Fastenal</h3>
+      <h3 style="color: white; margin-left: 2%; margin-right: 5%; font-style: italic; display: flex;">
+        FASTENAL
+      </h3>
       <p-tabMenu [scrollable]="true" [model]="items" [activeItem]="activeItem"></p-tabMenu>
 
     </div>
