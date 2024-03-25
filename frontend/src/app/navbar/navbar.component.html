@@ -10,8 +10,8 @@
   <ng-template pTemplate="end">
     <div style="display: flex; gap: 5px; margin-right: 10px;">
       <p-menu #menu [popup]="true" [model]="userItems" [style]="{'width': 'fit-content'}"></p-menu>
-      <button pButton type="button" label="{{user.firstName}} {{user.lastName}}" icon="pi pi-user"
-        (click)="menu.toggle($event)"></button>
+      <button pButton type="button" label="{{user.firstName | titlecase}} {{user.lastName | titlecase}}"
+        icon="pi pi-user" (click)="menu.toggle($event)"></button>
     </div>
   </ng-template>
 </p-menubar>
