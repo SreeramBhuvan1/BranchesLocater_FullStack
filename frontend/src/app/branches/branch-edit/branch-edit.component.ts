@@ -35,7 +35,7 @@ export class BranchEditComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     if (this.editMode) {
 
-      setTimeout(() => {
+      Promise.resolve().then(() => {
         let days = this.branch.businessHours.split(',');
         var selectedDays = [];
         var time = days[days.length - 1];
@@ -70,8 +70,14 @@ export class BranchEditComponent implements OnInit, AfterViewInit {
     return t;
   }
   isValidTimes(date1: Date, date2: Date) {
-    if (date1 <= date2) {
+    if (date1.getHours() < date2.getHours()) {
       return true;
+    }
+    else if (date1.getHours() === date2.getHours()) {
+      if (date1.getMinutes() <= date2.getMinutes()) {
+        return true;
+      }
+      return false;
     }
     return false;
   }
@@ -83,7 +89,6 @@ export class BranchEditComponent implements OnInit, AfterViewInit {
     for (let i = 0; i < form.value.businessDays.length; i++) {
       businessHours = businessHours + form.value.businessDays[i] + ", "
     }
-    console.log(businessHours);
     businessHours = businessHours + this.formatTime(form.value.startTime.getHours()) + ":"
       + this.formatTime(form.value.startTime.getMinutes()) + " to " +
       this.formatTime(form.value.endTime.getHours()) + ":" +

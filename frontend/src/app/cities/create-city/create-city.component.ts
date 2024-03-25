@@ -38,7 +38,7 @@ export class CreateCityComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     if (this.editMode) {
       this.city = this.service.getCity(this.id);
-      setTimeout(() => {
+      Promise.resolve().then(() => {
         this.tempform.setValue({ cityName: this.city.cityName, state: this.city.state, country: this.city.country, currency: this.city.currency });
       })
     }
