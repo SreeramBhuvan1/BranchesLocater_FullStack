@@ -20,7 +20,6 @@ export class CitiesDetailedViewComponent implements OnInit {
   constructor(private appservice: AppComponent, private service: CitiesService, private router: Router, private activeroute: ActivatedRoute, private confirmationService: ConfirmationService, private messageService: MessageService) {
   }
   ngOnInit(): void {
-    console.log("hi");
 
     this.activeroute.params.subscribe((params: Params) => {
       this.id = +params['id'];

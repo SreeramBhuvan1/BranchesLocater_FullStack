@@ -38,7 +38,6 @@ export class CreateCityComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     if (this.editMode) {
       this.city = this.service.getCity(this.id);
-      console.log(this.city)
       setTimeout(() => {
         this.tempform.setValue({ cityName: this.city.cityName, state: this.city.state, country: this.city.country, currency: this.city.currency });
       })
@@ -65,7 +64,6 @@ export class CreateCityComponent implements OnInit, AfterViewInit {
               this.router.navigate(['../'], { relativeTo: this.activeroute })
             },
             error: err => {
-              console.log(err)
               this.appservice.errorwhileadd();
             }
           });
@@ -92,7 +90,12 @@ export class CreateCityComponent implements OnInit, AfterViewInit {
         accept: () => {
           this.service.postdetails(form.value).subscribe({
             next: res => {
-              this.service.refreshList();
+              this.service.refreshList().subscribe({
+                next: res => {
+                  this.service.list = res as CityDetail[];
+                },
+                error: err => { console.log(err) }
+              });;
               this.tempform.form.reset();
               this.router.navigate(['../'], { relativeTo: this.activeroute });
               this.appservice.addedtoast();

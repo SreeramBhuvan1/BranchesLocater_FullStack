@@ -1,9 +1,8 @@
-
 <div class="grid">
-    
+
     <div class="col-8 col-offset-2" *ngIf="city">
-        <p-card header=" CityId : {{city.cityId}}">
-            <table style="width: 100%;">
+        <p-card header=" City : {{city.cityName | uppercase}}">
+            <table style="width: 100%; text-align: center;">
                 <colgroup>
                     <col span="1" style="background-color:lightgrey">
                 </colgroup>
@@ -13,8 +12,8 @@
                     </th>
                 </tr>
                 <tr>
-                    <th style="width: 40%;">City</th>
-                    <td>{{city.cityName}}</td>
+                    <th style="width: 40%;">City Id</th>
+                    <td>{{city.cityId}}</td>
                 </tr>
                 <tr>
                     <th>State</th>
@@ -31,12 +30,13 @@
             </table>
             <br>
             <div class="grid">
-                <div class="col col-offset-3 ">
+                <div class="col-4 col-offset-2 ">
                     <p-button label="Edit" routerLink="edit" (click)="edit(city.cityId)"></p-button>
                 </div>
 
-                <div class="col col-offset-1">
-                    <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+                <div class="col-5 col-offset-1">
+                    <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"
+                        rejectButtonStyleClass="p-button-text"></p-confirmDialog>
 
                     <p-button label="Delete" severity="danger" (click)="onDelete(city.cityId)"></p-button>
                 </div>

@@ -2,79 +2,105 @@
     <div class="col-12">
         <p-card>
             <p-panel
-                header="{{editMode ? 'Edit' : 'Enter' }} details {{editMode ? ' for Branch ': '' }} {{Branch ? Branch.buCode : ''}}">
+                header="{{editMode ? 'Edit' : 'Enter' }} details {{editMode ? ' for Branch ': '' }} {{branch ? branch.buCode : '' | uppercase}}">
                 <form #form="ngForm" (ngSubmit)="onSubmit(form)">
                     <p-scrollPanel [style]="{ width: '100%', height: '43vh' }">
-                        <div class="field" *ngIf="!editMode">
-                            <label for="buCode">BU Code</label>
-                            <input type="text" id="buCode"
-                                class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
-                                ngModel name="buCode" required>
+                        <div style="display: flex; flex-direction: row; gap: 18%">
+                            <div class="field" *ngIf="!editMode"
+                                style="display: flex; flex-direction: column; padding-left: 3px;">
+                                <label for="buCode">BU Code</label>
+                                <input type="text" id="buCode"
+                                    class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+                                    style="height: 7vh; width: 150%;" ngModel name="buCode" required>
+                            </div>
+                            <div class="field" style="display: flex; flex-direction: column; padding-left: 3px;">
+                                <label for="status">Status</label>
+                                <p-dropdown [options]="statusOptions" scrollHeight="150px"
+                                    placeholder="Select the status" id="status" ngModel name="status" required
+                                    appendTo="body"></p-dropdown>
+                            </div>
                         </div>
-                        <div class="field">
-                            <label for="status">Status</label>
-                            <input type="text" id="status"
-                                class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
-                                ngModel name="status" required>
-                        </div>
-                        <div class="field" *ngIf="!editMode">
-                            <label for="openedDate">Opened Date</label>
-                            <input type="date" id="openedDate"
-                                class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
-                                ngModel name="openedDate" required>
-                        </div>
-                        <div class="field">
+                        <div class="field" style="padding-left: 3px;">
                             <label for="address">Address</label>
                             <input type="text" id="address"
                                 class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
-                                ngModel name="address" required>
+                                ngModel name="address" required style="height: 7vh;">
                         </div>
-                        <div class="field" style="display: flex; flex-direction: column; gap: 1px; padding-left: 4px;"
-                            *ngIf="!editMode">
-                            <label for="cityId">City </label>
-                            <p-dropdown [options]="this.cityService.list" optionLabel="cityName" optionValue="cityId"
-                                scrollHeight="150px" [showClear]="true" placeholder="Select Your City" [filter]="true"
-                                id="cityId" filterBy="cityName" ngModel name="cityId" required></p-dropdown>
+                        <div style="display: flex; flex-direction: row; gap: 30%">
+                            <div class="field" *ngIf="!editMode"
+                                style="display: flex; flex-direction: column; gap: 1px; padding-left: 4px;">
+                                <label for="openedDate">Opened Date</label>
+                                <input type="date" id="openedDate"
+                                    class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary"
+                                    style="height: 7vh; width: 150%;" ngModel name="openedDate" required>
+                            </div>
+                            <div class="field"
+                                style="display: flex; flex-direction: column; gap: 1px; padding-left: 4px;"
+                                *ngIf="!editMode">
+                                <label for="cityId">City </label>
+                                <p-dropdown [options]="this.cityService.list" optionLabel="cityName"
+                                    optionValue="cityId" scrollHeight="150px" placeholder="Select Your City"
+                                    [filter]="true" id="cityId" filterBy="cityName" ngModel name="cityId" required
+                                    appendTo="body"></p-dropdown>
+                            </div>
                         </div>
-                        <div class="field">
+                        <div class="field" style="padding-left: 3px;">
                             <label for="phone">Phone</label>
                             <input type="text" id="phone"
                                 class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
-                                ngModel name="phone" required>
+                                ngModel name="phone" required style="height: 7vh;">
                         </div>
-                        <div class="field">
-                            <label for="businessHours">Business Hours</label>
-                            <input type="text" id="businessHours"
-                                class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
-                                ngModel name="businessHours" required>
+                        <div class="field" style="display: flex; flex-direction: column; gap: 1px; padding-left: 4px;">
+                            <label for="businessDays">Business Days</label>
+                            <p-multiSelect [options]="days" ngModel name="businessDays" required appendTo="body"
+                                [style]="{'width': '100%'}" required></p-multiSelect>
                         </div>
-                        <div class="field" *ngIf="!editMode">
-                            <label for="latitude">Latitude</label>
-                            <input type="number" id="latitude"
-                                class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
-                                ngModel name="latitude" required>
+                        <div style="display: flex; flex-direction: row; gap: 18%">
+                            <div class="field"
+                                style="display: flex; flex-direction: column; gap: 1px; padding-left: 3px;">
+                                <label for="startTime">Start Time</label>
+                                <p-calendar [timeOnly]="true" ngModel name="startTime" placeholder="hh:mm"
+                                    [style]="{'width': '60%'}" appendTo="body" required></p-calendar>
+                            </div>
+                            <div class="field" style="display: flex; flex-direction: column; gap: 1px;">
+                                <label for="endTime">End Time</label>
+                                <p-calendar [timeOnly]="true" ngModel name="endTime" placeholder="hh:mm"
+                                    [style]="{'width': '60%'}" appendTo="body" required></p-calendar>
+                            </div>
                         </div>
-                        <div class="field" *ngIf="!editMode">
-                            <label for="longitude">Longitude</label>
-                            <input type="number" id="longitude"
-                                class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
-                                ngModel name="longitude" required>
+                        <div style="display: flex; flex-direction: row; gap: 41%">
+                            <div class="field" *ngIf="!editMode"
+                                style="display: flex; flex-direction: column; gap: 1px; padding-left: 3px;">
+                                <label for="latitude">Latitude</label>
+                                <input type="number" id="latitude"
+                                    class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary"
+                                    ngModel name="latitude" required min="-90" max="90"
+                                    [style]="{'width': '145%', 'height': '7vh !important'}">
+                            </div>
+                            <div class="field" *ngIf="!editMode"
+                                style="display: flex; flex-direction: column; gap: 1px;">
+                                <label for="longitude">Longitude</label>
+                                <input type="number" id="longitude"
+                                    class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary"
+                                    ngModel name="longitude" required min="-180" max="180"
+                                    [style]="{'width': '135%', 'height': '7vh !important'}">
+                            </div>
                         </div>
                     </p-scrollPanel>
-                    <br>
-                    <div class="grid">
-                        <div class="col col-offset-3 ">
-                            <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"
-                                rejectButtonStyleClass="p-button-text"></p-confirmDialog>
-                            <p-button label="{{editMode ? 'Update': 'Add'}}" type="submit"
-                                [disabled]="!form.valid"></p-button>
-                        </div>
-                        <div class="col col-offset-1">
-                            <p-button label="Discard" severity="danger" routerLink="../"></p-button>
-                        </div>
-                    </div>
                 </form>
             </p-panel>
+            <br>
+            <div class="grid">
+                <div class="col-3 col-offset-3 ">
+                    <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"
+                        rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+                    <p-button label="{{editMode ? 'Update': 'Add'}}" type="submit" [disabled]="!form.valid"
+                        (click)="onSubmit(form)"></p-button>
+                </div>
+                <div class="col-5 col-offset-1">
+                    <p-button label="Discard" severity="danger" routerLink="../"></p-button>
+                </div>
+            </div>
         </p-card>
     </div>
 </div>

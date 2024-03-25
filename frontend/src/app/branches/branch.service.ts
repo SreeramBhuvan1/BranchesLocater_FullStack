@@ -6,21 +6,17 @@ import { NgForm } from "@angular/forms";
 
 @Injectable({ providedIn: 'root' })
 export class BranchService {
-    public Branches: Branch[];
+    public branches: Branch[];
 
     constructor(private http: HttpClient) { }
 
     loadBranches() {
-        this.http.get<Branch[]>('https://localhost:7207/api/Branches').subscribe({
-            next: res => {
-                this.Branches = res;
-            }
-        })
+        return this.http.get<Branch[]>('https://localhost:7207/api/Branches');
     }
 
     getBranch(code: string) {
-        var index = this.Branches.findIndex(x => x.buCode === code);
-        return this.Branches[index];
+        var index = this.branches.findIndex(x => x.buCode === code);
+        return this.branches[index];
     }
 
     addBranch(branch: CreateBranch) {
@@ -31,14 +27,14 @@ export class BranchService {
         return this.http.delete('https://localhost:7207/api/Branches/' + Id);
     }
 
-    updateBranch(Id: number, code: string, form: NgForm) {
+    updateBranch(Id: number, code: string, businessHours: string, form: NgForm) {
         return this.http.put('https://localhost:7207/api/Branches/' + Id, {
             id: Id,
             buCode: code,
             status: form.value.status,
             address: form.value.address,
             phone: form.value.phone,
-            businessHours: form.value.businessHours
+            businessHours: businessHours
         });
     }
 }

@@ -14,16 +14,39 @@ import { CitiesService } from '../../shared-sources/cities-service';
 })
 export class BranchDetailsComponent implements OnInit {
   code: string;
-  Branch: Branch;
+  branch: Branch;
   city: CityDetail;
-
+  days: string[] = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+  businessHours: string = "";
   constructor(private confirmationService: ConfirmationService, private appService: AppComponent, private route: ActivatedRoute, private branchService: BranchService, private cityService: CitiesService, private router: Router) { }
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
       this.code = params['id'];
-      this.Branch = this.branchService.getBranch(this.code);
-      this.city = this.cityService.getCity(this.Branch.cityId);
+      this.branch = this.branchService.getBranch(this.code);
+      this.city = this.cityService.getCity(this.branch.cityId);
+      let bDays = this.branch.businessHours.split(',');
+      var selectedDays = [];
+      var time = bDays[bDays.length - 1];
+      for (var i = 0; i < bDays.length - 1; i++) {
+        selectedDays.push(bDays[i].trim());
+      }
+      var i = 0;
+      this.businessHours = "";
+      while (i < selectedDays.length) {
+        var j = i;
+        while (j < selectedDays.length - 1 && (this.days.indexOf(selectedDays[j]) + 1) === this.days.indexOf(selectedDays[j + 1])) {
+          j++;
+        }
+        if (i !== j) {
+          this.businessHours = this.businessHours + selectedDays[i] + " to " + selectedDays[j] + ', ';
+        }
+        else {
+          this.businessHours = this.businessHours + selectedDays[i] + ', ';
+        }
+        i = j + 1;
+      }
+      this.businessHours += time;
     })
   }
 
@@ -33,10 +56,14 @@ export class BranchDetailsComponent implements OnInit {
       header: 'Confirmation',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.branchService.deleteBranch(this.Branch.id).subscribe({
+        this.branchService.deleteBranch(this.branch.id).subscribe({
           next: res => {
             this.appService.deletedtoast();
-            this.branchService.loadBranches();
+            this.branchService.loadBranches().subscribe({
+              next: res => {
+                this.branchService.branches = res;
+              }
+            });
             this.router.navigate(['branches']);
           }, error: err => {
             if (err.status === 403) {

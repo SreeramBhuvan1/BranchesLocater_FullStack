@@ -42,6 +42,10 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { CalendarModule } from 'primeng/calendar';
+import { MenuModule } from 'primeng/menu';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -84,7 +88,10 @@ import { ToastModule } from 'primeng/toast';
     PanelModule,
     ToastModule,
     DropdownModule,
-    PasswordModule
+    PasswordModule,
+    MultiSelectModule,
+    CalendarModule,
+    MenuModule
   ],
   providers: [CitiesService, ConfirmationService, MessageService, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }],
   bootstrap: [AppComponent]

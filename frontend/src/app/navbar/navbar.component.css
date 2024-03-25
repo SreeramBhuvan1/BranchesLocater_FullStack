@@ -1,10 +1,40 @@
-.container {
-    display: flex;
-    align-items: center; /* Vertically center the items */
-  }
-  h3 {
-    margin-right: 60px; /* Add some spacing between the heading and menu bar */
-  }
-  p-menubar{
-    margin-right: 10px;
-  }
+h3 {
+  margin-right: 60px;
+  /* Add some spacing between the heading and menu bar */
+}
+
+p-tabmenu {
+  margin-left: 5%;
+}
+
+::ng-deep .p-tabmenu .p-tabmenu-nav li a {
+  background-color: #00599c;
+  color: white;
+}
+
+::ng-deep .p-tabmenu .p-tabmenu-nav {
+  background-color: #00599c;
+}
+
+::ng-deep .p-tabmenu .p-tabmenu-nav li.p-highlight a {
+  color: rgb(38, 36, 36);
+}
+
+::ng-deep .p-tabmenu .p-tabmenu-nav li.p-highlight a {
+  border-color: red;
+}
+
+
+::ng-deep .LogButton {
+  width: 200px;
+  margin-left: 300%;
+  background-color: white;
+}
+
+::ng-deep .logout {
+  background-color: red;
+}
+
+.logout-button:hover {
+  color: red !important;
+}

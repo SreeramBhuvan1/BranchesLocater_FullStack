@@ -1,19 +1,34 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { AuthService } from '../auth/auth.service';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit, OnDestroy {
   items: MenuItem[] | undefined;
   activeItem: MenuItem;
-
-  constructor(private authService: AuthService) { }
+  userItems = [
+    { label: 'Change Password', icon: 'pi pi-refresh', routerLink: ['/auth'] },
+    { label: 'Logout', icon: 'pi pi-power-off', command: () => this.onLogout(), styleClass: 'logout-button' }
+  ];
+  sub: Subscription;
+  user: any;
+  constructor(private router: Router, private authService: AuthService) { }
 
   ngOnInit(): void {
+    this.sub = this.authService.user.subscribe(user => {
+      if (!user) {
+        this.user = user;
+      }
+      else {
+        this.user = user;
+      }
+    })
     this.items = [
       {
         label: 'Branches', routerLink: ['/branches']
@@ -23,8 +38,9 @@ export class NavbarComponent {
       }
     ];
   }
-  clicked() {
-    console.log("navbar clicked");
+
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
   onLogout() {
     this.authService.logout();

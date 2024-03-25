@@ -1,18 +1,17 @@
 <p-menubar
-  [style]="{'background-color': 'rgb(33,101,226)', 'border': '2px solid rgb(33,101,226)', 'border-radius': '0', 'height': '11vh'}">
+  [style]="{'background-color': '#00599c','border': 'none','border-radius': '0px', 'height': '10vh', 'padding': '0px'}">
   <ng-template pTemplate="start">
-    <div class="container">
-      <h3 style="color: white; margin-left: 2%; margin-right: 5%; font-style: italic; display: flex;">
-        FASTENAL
-      </h3>
+    <div class="container" style="display: flex; flex-direction: row; margin: 0px; padding: 0px;">
+      <img src="https://crafter.fastenal.com/static-assets/images/fcom/fastenal-logo-blue-white.png"
+        style="height: 6vh; width: auto; margin-top: 4px;">
       <p-tabMenu [scrollable]="true" [model]="items" [activeItem]="activeItem"></p-tabMenu>
-
     </div>
   </ng-template>
   <ng-template pTemplate="end">
-    <div style="display: flex; gap: 5px;">
-      <p-button routerLink="/auth">Change Password</p-button>
-      <p-button severity="danger" (click)="onLogout()"> Logout</p-button>
+    <div style="display: flex; gap: 5px; margin-right: 10px;">
+      <p-menu #menu [popup]="true" [model]="userItems" [style]="{'width': 'fit-content'}"></p-menu>
+      <button pButton type="button" label="{{user.firstName}} {{user.lastName}}" icon="pi pi-user"
+        (click)="menu.toggle($event)"></button>
     </div>
   </ng-template>
 </p-menubar>

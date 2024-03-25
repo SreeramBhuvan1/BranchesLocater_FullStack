@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BranchService } from './branch.service';
 import { CitiesService } from '../shared-sources/cities-service';
+import { CityDetail } from '../shared-sources/cities-model';
 
 @Component({
   selector: 'app-branches',
@@ -11,7 +12,16 @@ export class BranchesComponent implements OnInit {
   constructor(private branchSerive: BranchService, private cityService: CitiesService) { }
 
   ngOnInit(): void {
-    this.branchSerive.loadBranches();
-    this.cityService.refreshList();
+    this.branchSerive.loadBranches().subscribe({
+      next: res => {
+        this.branchSerive.branches = res;
+      }
+    });
+    this.cityService.refreshList().subscribe({
+      next: res => {
+        this.cityService.list = res as CityDetail[];
+      },
+      error: err => { console.log(err) }
+    });;
   }
 }

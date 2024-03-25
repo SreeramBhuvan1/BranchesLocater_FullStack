@@ -35,7 +35,10 @@ namespace Task1.Repository
             return new AuthResponseDto
             {
                 Token = token,
-                UserId = user.Id
+                UserId = user.Id,
+                Email = user.Email,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
             };
         }
 
@@ -56,7 +59,10 @@ namespace Task1.Repository
             return new AuthResponseDto
             {
                 Token= token,
-                UserId = user.Id
+                UserId = user.Id,
+                Email = user.Email,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
             };
         }
 

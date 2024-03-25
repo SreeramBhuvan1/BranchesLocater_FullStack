@@ -1,0 +1,7 @@
+::ng-deep .p-scrollpanel .p-scrollpanel-bar-y {
+    background: rgb(77, 75, 75);
+}
+
+/* ::ng-deep .p-dropdown-panel {
+    z-index: 9999 !important;
+} */

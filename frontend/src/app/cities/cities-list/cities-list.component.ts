@@ -14,7 +14,12 @@ export class CitiesListComponent implements OnInit {
   constructor(public cityservice: CitiesService, private router: Router, private ser: AuthService) {
   }
   ngOnInit() {
-    this.cityservice.refreshList();
+    this.cityservice.refreshList().subscribe({
+      next: res => {
+        this.cityservice.list = res as CityDetail[];
+      },
+      error: err => { console.log(err) }
+    });;
   }
 
   isActive(cityId: number): boolean {

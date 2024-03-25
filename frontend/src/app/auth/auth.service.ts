@@ -4,11 +4,14 @@ import { Router } from "@angular/router";
 import { BehaviorSubject, tap } from "rxjs";
 
 export class User {
-    constructor(public email: string, public userId: string, public token: string) { }
+    constructor(public userId: string, public token: string, public email: string, public firstName: string, public lastName: string) { }
 }
 export interface LoginResponse {
     userId: string,
     token: string,
+    email: string,
+    firstName: string,
+    lastName: string,
 }
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -21,7 +24,7 @@ export class AuthService {
             email: email,
             password: password
         }).pipe(tap(resData => {
-            const user = new User(email, resData.userId, resData.token);
+            const user = new User(resData.userId, resData.token, resData.email, resData.firstName, resData.lastName);
             this.user.next(user);
             localStorage.setItem('userData', JSON.stringify(user));
         }));
@@ -29,14 +32,16 @@ export class AuthService {
 
     autoLogin() {
         const userData: {
-            email: string,
             userId: string,
-            token: string
+            token: string,
+            email: string,
+            firstName: string,
+            lastName: string,
         } = JSON.parse(localStorage.getItem('userData'));
         if (!userData) {
             return;
         }
-        const loadedUser = new User(userData.email, userData.userId, userData.token);
+        const loadedUser = new User(userData.userId, userData.token, userData.email, userData.firstName, userData.lastName);
         this.user.next(loadedUser);
     }
 
@@ -61,7 +66,7 @@ export class AuthService {
             oldPassword: password,
             newPassword: newPassword,
         }).pipe(tap(resData => {
-            const user = new User(email, resData.userId, resData.token);
+            const user = new User(resData.userId, resData.token, resData.email, resData.firstName, resData.lastName);
             this.user.next(user);
             localStorage.setItem('userData', JSON.stringify(user));
         }));

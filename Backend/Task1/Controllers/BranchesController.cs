@@ -33,7 +33,7 @@ namespace Task1.Controllers
 
         // GET: api/Branches
         [HttpGet]
-        //[Authorize(Roles = "Administrator")]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<GetBranchDto>>> GetBranches()
         {
             var branches = await _branchRepository.GetAllAsync();
@@ -43,6 +43,7 @@ namespace Task1.Controllers
 
         // GET: api/Branches/5
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult<Branch>> GetBranch(int id)
         {
             var branch = await _branchRepository.GetDetails(id);

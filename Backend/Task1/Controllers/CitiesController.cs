@@ -32,6 +32,7 @@ namespace Task1.Controllers
 
         // GET: api/Cities
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<GetCityDto>>> GetCities()
         {
             var cities = await _cityRepository.GetAllAsync();
@@ -41,6 +42,7 @@ namespace Task1.Controllers
 
         // GET: api/Cities/5
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult<GetCityDto>> GetCity(int id)
         {
             var city = await _cityRepository.GetAsync(id);
@@ -54,6 +56,7 @@ namespace Task1.Controllers
         }
 
         [HttpGet("{id}/weather")]
+        [Authorize]
         public async Task<IActionResult> GetForecast(int id)
         {
             try

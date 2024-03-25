@@ -1,7 +1,7 @@
 <div class="grid">
 
-    <div class="col-11 col-offset-1" *ngIf="Branch">
-        <p-card header="BU Code: {{Branch.buCode}}">
+    <div class="col-11 col-offset-1" *ngIf="branch">
+        <p-card header="BU Code: {{branch.buCode | uppercase}}">
             <table style="width: 100%; text-align: center;">
                 <colgroup>
                     <col span="1" style="background-color:lightgrey">
@@ -13,35 +13,35 @@
                 </tr>
                 <tr>
                     <th style="width: 40%;">Status</th>
-                    <td>{{Branch.status}}</td>
+                    <td>{{branch.status}}</td>
                 </tr>
                 <tr>
                     <th>Opened Date</th>
-                    <td>{{Branch.openedDate}}</td>
+                    <td>{{branch.openedDate}}</td>
                 </tr>
                 <tr>
                     <th>Address</th>
-                    <td>{{Branch.address}}</td>
+                    <td>{{branch.address}}</td>
                 </tr>
                 <tr>
                     <th>Phone</th>
-                    <td>{{Branch.phone}}</td>
+                    <td>{{branch.phone}}</td>
                 </tr>
                 <tr>
                     <th>Business Hours</th>
-                    <td>{{Branch.businessHours}}</td>
+                    <td>{{businessHours}}</td>
                 </tr>
                 <tr>
                     <th>Location</th>
-                    <td>{{city.cityName}}, {{city.state}}, {{city.country}}</td>
+                    <td>{{city.cityName | uppercase}}, {{city.state}}, {{city.country}}</td>
                 </tr>
                 <tr>
                     <th>Latitude</th>
-                    <td>{{Branch.latitude}}</td>
+                    <td>{{branch.latitude}}</td>
                 </tr>
                 <tr>
                     <th>Longitude</th>
-                    <td>{{Branch.longitude}}</td>
+                    <td>{{branch.longitude}}</td>
                 </tr>
             </table>
             <br>
