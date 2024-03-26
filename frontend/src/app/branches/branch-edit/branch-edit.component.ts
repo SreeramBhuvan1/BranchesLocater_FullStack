@@ -17,7 +17,7 @@ export class BranchEditComponent implements OnInit, AfterViewInit {
   code: string;
   branch: Branch;
   days: string[] = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-  statusOptions: string[] = ['Opened', 'Closed', 'Under-Construction'];
+  statusOptions: string[] = ['Open', 'Close', 'Under-Construction'];
   @ViewChild('form') branchForm: NgForm
 
   constructor(private confirmationService: ConfirmationService, private appService: AppComponent, private branchService: BranchService, private router: Router, private route: ActivatedRoute, public cityService: CitiesService) { }
