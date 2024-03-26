@@ -14,7 +14,9 @@ p-tabmenu {
 
 ::ng-deep .p-tabmenu .p-tabmenu-nav {
   background-color: #00599c;
+  
 }
+
 
 ::ng-deep .p-tabmenu .p-tabmenu-nav li.p-highlight a {
   color: rgb(38, 36, 36);
