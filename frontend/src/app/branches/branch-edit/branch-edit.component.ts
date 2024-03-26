@@ -36,7 +36,7 @@ export class BranchEditComponent implements OnInit, AfterViewInit {
     if (this.editMode) {
 
       Promise.resolve().then(() => {
-        let days = this.branch.businessHours.split(',');
+        let days = this.branch.business_Hours.split(',');
         var selectedDays = [];
         var time = days[days.length - 1];
         for (var i = 0; i < days.length - 1; i++) {
@@ -107,7 +107,7 @@ export class BranchEditComponent implements OnInit, AfterViewInit {
             this.appService.customError("Start time should be less than End time");
             return;
           }
-          this.branchService.updateBranch(this.branch.id, this.branch.buCode, businessHours, form).subscribe({
+          this.branchService.updateBranch(this.branch.id, this.branch.bU_Codes, businessHours, form).subscribe({
             next: res => {
               this.appService.updateToast();
               this.branchService.loadBranches().subscribe({
@@ -115,12 +115,12 @@ export class BranchEditComponent implements OnInit, AfterViewInit {
                   this.branchService.branches = res;
                 }
               });
-              var index = this.branchService.branches.findIndex(q => q.buCode == this.branch.buCode);
+              var index = this.branchService.branches.findIndex(q => q.bU_Codes == this.branch.bU_Codes);
               this.branchService.branches[index] = new Branch(
                 this.branch.id,
-                this.branch.buCode,
+                this.branch.bU_Codes,
                 form.value.status,
-                this.branch.openedDate,
+                this.branch.opened_dt,
                 form.value.address,
                 this.branch.cityId,
                 form.value.phone,
@@ -128,7 +128,7 @@ export class BranchEditComponent implements OnInit, AfterViewInit {
                 this.branch.latitude,
                 this.branch.longitude
               )
-              this.router.navigate(['/branches/' + this.branch.buCode]);
+              this.router.navigate(['/branches/' + this.branch.bU_Codes]);
             }, error: err => {
               if (err.status === 400) {
                 this.appService.customError(err.error);

@@ -15,7 +15,7 @@ export class BranchService {
     }
 
     getBranch(code: string) {
-        var index = this.branches.findIndex(x => x.buCode === code);
+        var index = this.branches.findIndex(x => x.bU_Codes === code);
         return this.branches[index];
     }
 
@@ -30,11 +30,11 @@ export class BranchService {
     updateBranch(Id: number, code: string, businessHours: string, form: NgForm) {
         return this.http.put('https://localhost:7207/api/Branches/' + Id, {
             id: Id,
-            buCode: code,
+            bU_Codes: code,
             status: form.value.status,
             address: form.value.address,
             phone: form.value.phone,
-            businessHours: businessHours
+            business_Hours: businessHours
         });
     }
 }

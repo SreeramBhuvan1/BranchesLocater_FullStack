@@ -1,7 +1,7 @@
 <div class="grid">
 
     <div class="col-11 col-offset-1" *ngIf="branch">
-        <p-card header="BU Code: {{branch.buCode | uppercase}}">
+        <p-card header="BU Code: {{branch.bU_Codes | uppercase}}">
             <table style="width: 100%; text-align: center;">
                 <colgroup>
                     <col span="1" style="background-color:lightgrey">
@@ -17,7 +17,7 @@
                 </tr>
                 <tr>
                     <th>Opened Date</th>
-                    <td>{{branch.openedDate}}</td>
+                    <td>{{branch.opened_dt}}</td>
                 </tr>
                 <tr>
                     <th>Address</th>

@@ -25,7 +25,7 @@ export class BranchDetailsComponent implements OnInit {
       this.code = params['id'];
       this.branch = this.branchService.getBranch(this.code);
       this.city = this.cityService.getCity(this.branch.cityId);
-      let bDays = this.branch.businessHours.split(',');
+      let bDays = this.branch.business_Hours.split(',');
       var selectedDays = [];
       var time = bDays[bDays.length - 1];
       for (var i = 0; i < bDays.length - 1; i++) {

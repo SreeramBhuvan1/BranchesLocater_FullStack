@@ -1,17 +1,17 @@
 <p-scrollPanel [style]="{ width: '100%', height: '70vh' }">
     <div *ngFor="let branch of branchService.branches; let id=index;">
-        <div *ngIf="isActive(branch.buCode)">
-            <p-fieldset legend="{{id+1}}" [routerLink]="[branch.buCode]" styleClass="active"
+        <div *ngIf="isActive(branch.bU_Codes)">
+            <p-fieldset legend="{{id+1}}" [routerLink]="[branch.bU_Codes]" styleClass="active"
                 [style]="{ cursor: 'pointer' }">
                 <p class="m-0">
-                    <b>BU Code</b> : {{branch.buCode | uppercase}}
+                    <b>BU Code</b> : {{branch.bU_Codes | uppercase}}
                 </p>
             </p-fieldset>
         </div>
-        <div *ngIf="!isActive(branch.buCode)">
-            <p-fieldset legend="{{id+1}}" [routerLink]="[branch.buCode]" [style]="{ cursor: 'pointer' }">
+        <div *ngIf="!isActive(branch.bU_Codes)">
+            <p-fieldset legend="{{id+1}}" [routerLink]="[branch.bU_Codes]" [style]="{ cursor: 'pointer' }">
                 <p class="m-0">
-                    <b>BU Code</b> : {{branch.buCode | uppercase}}
+                    <b>BU Code</b> : {{branch.bU_Codes | uppercase}}
                 </p>
             </p-fieldset>
         </div>
