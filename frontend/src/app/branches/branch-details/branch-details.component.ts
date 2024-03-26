@@ -58,7 +58,7 @@ export class BranchDetailsComponent implements OnInit {
       accept: () => {
         this.branchService.deleteBranch(this.branch.id).subscribe({
           next: res => {
-            this.appService.deletedtoast();
+            this.appService.deletedToast();
             this.branchService.loadBranches().subscribe({
               next: res => {
                 this.branchService.branches = res;

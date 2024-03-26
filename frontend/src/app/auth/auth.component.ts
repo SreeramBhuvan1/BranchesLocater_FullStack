@@ -88,7 +88,7 @@ export class AuthComponent implements OnInit, OnDestroy {
     }
     else {
       if (form.value.password === form.value.newPassword) {
-        this.error = 'Do not enter same password for both fields. Choose a new password';
+        this.error = 'Do not enter same password for both the fields. Choose a new password';
         this.appService.customError(this.error);
         this.isLoading = false;
         return;

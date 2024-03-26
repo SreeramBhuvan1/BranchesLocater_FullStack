@@ -109,7 +109,7 @@ export class BranchEditComponent implements OnInit, AfterViewInit {
           }
           this.branchService.updateBranch(this.branch.id, this.branch.buCode, businessHours, form).subscribe({
             next: res => {
-              this.appService.updatetoast();
+              this.appService.updateToast();
               this.branchService.loadBranches().subscribe({
                 next: res => {
                   this.branchService.branches = res;
@@ -182,7 +182,7 @@ export class BranchEditComponent implements OnInit, AfterViewInit {
           );
           this.branchService.addBranch(branch).subscribe({
             next: res => {
-              this.appService.addedtoast();
+              this.appService.addedToast();
               this.branchService.loadBranches().subscribe({
                 next: res => {
                   this.branchService.branches = res;

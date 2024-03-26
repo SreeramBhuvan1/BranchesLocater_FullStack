@@ -60,11 +60,11 @@ export class CreateCityComponent implements OnInit, AfterViewInit {
               }
               const index = this.service.list.findIndex(x => x.cityId === this.id);
               this.service.list[index] = tempCity;
-              this.appservice.updatetoast();
+              this.appservice.updateToast();
               this.router.navigate(['../'], { relativeTo: this.activeroute })
             },
             error: err => {
-              this.appservice.errorwhileadd();
+              this.appservice.errorWhileAdd();
             }
           });
 
@@ -98,12 +98,12 @@ export class CreateCityComponent implements OnInit, AfterViewInit {
               });;
               this.tempform.form.reset();
               this.router.navigate(['../'], { relativeTo: this.activeroute });
-              this.appservice.addedtoast();
+              this.appservice.addedToast();
 
             },
             error: err => {
               console.log(err)
-              this.appservice.errorwhileadd();
+              this.appservice.errorWhileAdd();
             }
           });
         },

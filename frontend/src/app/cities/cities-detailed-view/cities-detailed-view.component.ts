@@ -45,7 +45,7 @@ export class CitiesDetailedViewComponent implements OnInit {
             } else {
               console.error("City with ID", id, "not found in the list.");
             }
-            this.appservice.deletedtoast();
+            this.appservice.deletedToast();
             this.router.navigate(['../',], { relativeTo: this.activeroute });
           },
           error: err => {

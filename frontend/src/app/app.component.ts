@@ -26,14 +26,14 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }
-  addedtoast() {
+  addedToast() {
     this.msgservice.add({ severity: 'success', summary: 'Success', detail: 'Added Successfully' });
   }
-  deletedtoast() {
+  deletedToast() {
     this.msgservice.add({ severity: 'success', summary: 'Success', detail: 'Deleted Successfully' });
 
   }
-  updatetoast() {
+  updateToast() {
     this.msgservice.add({ severity: 'success', summary: 'Success', detail: 'Updated Successfully' });
   }
   cancelled() {
@@ -42,7 +42,7 @@ export class AppComponent implements OnInit, OnDestroy {
   rejected() {
     this.msgservice.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected' });
   }
-  errorwhileadd() {
+  errorWhileAdd() {
     this.msgservice.add({ severity: 'error', summary: 'Error', detail: 'Error Occured While Adding' });
   }
   updateError() {
