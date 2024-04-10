@@ -29,6 +29,8 @@
                     class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
                     ngModel name="email" required email>
             </div>
+
+            
             <div class="field" style="display: flex; flex-direction: column;">
                 <label for="password" >Password</label>
                 <p-password type="password" id="password" [toggleMask]="true" [feedback]="!isLoginMode && !user"
