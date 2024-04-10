@@ -33,7 +33,7 @@
                 </tr>
                 <tr>
                     <th>Location</th>
-                    <td>{{city.cityName | uppercase}}, {{city.state}}, {{city.country}}</td>
+                    <td>{{city.cityName | uppercase}}</td>
                 </tr>
                 <tr>
                     <th>Latitude</th>
@@ -46,16 +46,15 @@
             </table>
             <br>
             <div class="grid justify-content-center">
-                <div class="col-3" style="display: flex; justify-content: center;">
+                <div class="col-4 " style="display: flex; justify-content: center;">
                     <p-button label="Edit" routerLink="edit"></p-button>
                 </div>
-                <div class="col-5" style="display: flex; justify-content: center;">
-                    <p-button label="See Weather" routerLink="weather"></p-button>
+                <div class="col-4 " style="display: flex; justify-content: center;">
+                    <p-button label="Get Weather" routerLink="weather"></p-button>
                 </div>
-                <div class="col-3" style="display: flex; justify-content: center;">
-                    <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"
-                        rejectButtonStyleClass="p-button-text"></p-confirmDialog>
-                    <p-button label="Delete" severity="danger" (click)="onDelete()"></p-button>
+                <div class="col-4" style="display: flex; justify-content: center;">
+                    
+                    <p-button label="Go Back"  (click)="goBack()"></p-button>
                 </div>
             </div>
         </p-card>

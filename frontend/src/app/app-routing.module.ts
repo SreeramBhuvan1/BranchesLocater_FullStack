@@ -11,12 +11,14 @@ import { BranchStartComponent } from './branches/branch-start/branch-start.compo
 import { BranchEditComponent } from './branches/branch-edit/branch-edit.component';
 import { BranchDetailsComponent } from './branches/branch-details/branch-details.component';
 import { BranchWeatherComponent } from './branches/branch-weather/branch-weather.component';
+import { CitiesWeatherComponent } from './cities/cities-weather/cities-weather.component';
+import { CitiesBranchesComponent } from './cities/cities-branches/cities-branches.component';
 
 
 
 
 const routes: Routes = [
-  { path: '', redirectTo: 'branches', pathMatch: 'full' },
+  { path: '', redirectTo: 'auth', pathMatch: 'full' },
   {
     path: 'branches', component: BranchesComponent, canActivate: [canActivate], children: [
       { path: '', component: BranchStartComponent },
@@ -32,6 +34,8 @@ const routes: Routes = [
       { path: 'add', component: CreateCityComponent },
       { path: ':id', component: CitiesDetailedViewComponent },
       { path: ':id/edit', component: CreateCityComponent },
+      { path: ':id/Branches', component: CitiesBranchesComponent },
+      { path: ':id/weather', component: CitiesWeatherComponent }
     ]
   },
   { path: 'auth', component: AuthComponent }

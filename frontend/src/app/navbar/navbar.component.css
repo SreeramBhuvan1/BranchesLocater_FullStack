@@ -14,16 +14,20 @@ p-tabmenu {
 
 ::ng-deep .p-tabmenu .p-tabmenu-nav {
   background-color: #00599c;
-  
+
 }
 
 
 ::ng-deep .p-tabmenu .p-tabmenu-nav li.p-highlight a {
-  color: rgb(38, 36, 36);
+  background-color:white;
+  padding-top:2px;
+  padding-bottom: 2px;
+ 
+  color: black;
 }
 
 ::ng-deep .p-tabmenu .p-tabmenu-nav li.p-highlight a {
-  border-color: red;
+  border-color: white;
 }
 
 

@@ -3,6 +3,7 @@ import { Branch } from '../branch.model';
 import { ActivatedRoute, Params } from '@angular/router';
 import { BranchService } from '../branch.service';
 import { HttpClient } from '@angular/common/http';
+import { AppComponent } from '../../app.component';
 
 @Component({
   selector: 'app-branch-weather',
@@ -14,7 +15,7 @@ export class BranchWeatherComponent implements OnInit {
   Branch: Branch;
   res = null;
 
-  constructor(private route: ActivatedRoute, private branchService: BranchService, private http: HttpClient) { }
+  constructor(private appService:AppComponent,private route: ActivatedRoute, private branchService: BranchService, private http: HttpClient) { }
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
@@ -23,6 +24,9 @@ export class BranchWeatherComponent implements OnInit {
       this.http.get('https://localhost:7207/api/Cities/' + this.Branch.cityId + '/weather').subscribe({
         next: res => {
           this.res = res;
+        },
+        error:err=>{
+          this.appService.customError("Unable to fetch City Weather");
         }
       })
     })

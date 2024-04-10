@@ -13,8 +13,11 @@ import { AppComponent } from '../app.component';
 export class AuthComponent implements OnInit, OnDestroy {
   @ViewChild('authForm') form: NgForm;
   isLoginMode = true;
+  
+  isvalidEmail=false;
   isLoading = false;
   error: string = null;
+  resetEmailLink:string;
   user = null;
   sub: Subscription;
 
@@ -33,6 +36,7 @@ export class AuthComponent implements OnInit, OnDestroy {
         this.user = user;
       }
     })
+    console.log(this.user);
   }
 
   ngOnDestroy(): void {
@@ -44,6 +48,24 @@ export class AuthComponent implements OnInit, OnDestroy {
     this.error = null;
     form.reset();
   }
+  resetPassword(){
+    const red=prompt("Enter the Email Id To Reset the Password");
+    if(red!=null){
+    this.resetEmailLink=red;
+    if(this.checkValidEmail()){
+console.log("correct");
+this.appService.customSuccess("Email Sent");
+    }
+    else{
+      this.appService.customError("Email is not Valid");
+    }
+    }
+  }
+  checkValidEmail(){
+    const pattern= /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+    this.isvalidEmail=pattern.test(this.resetEmailLink);
+   return this.isvalidEmail;
+  }
 
   onSubmit(form: NgForm) {
     if (!form.valid) {
@@ -51,16 +73,16 @@ export class AuthComponent implements OnInit, OnDestroy {
     }
     this.isLoading = true;
     if (this.isLoginMode && !this.user) {
-      this.authService.login(form.value.email, form.value.password).subscribe(resData => {
+      this.authService.login(form.value.email, form.value.password).subscribe({next:resData => {
         this.error = null;
         this.appService.customSuccess('Logged In Successfully');
         this.router.navigate(['/branches']);
-      }, errorResp => {
+      }, error:errorResp => {
         if (errorResp.error.status === 401) {
           this.error = 'Incorrect credentials'
           this.appService.customError(this.error);
         }
-      });
+      }});
     }
     else if (!this.isLoginMode && !this.user) {
       if (form.value.password !== form.value.confirmPassword) {

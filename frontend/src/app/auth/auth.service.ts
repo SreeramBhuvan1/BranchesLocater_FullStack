@@ -26,6 +26,7 @@ export class AuthService {
         }).pipe(tap(resData => {
             const user = new User(resData.userId, resData.token, resData.email, resData.firstName, resData.lastName);
             this.user.next(user);
+            console.log(user);
             localStorage.setItem('userData', JSON.stringify(user));
         }));
     }
@@ -44,7 +45,6 @@ export class AuthService {
         const loadedUser = new User(userData.userId, userData.token, userData.email, userData.firstName, userData.lastName);
         this.user.next(loadedUser);
     }
-
     logout() {
         this.user.next(null);
         localStorage.removeItem('userData');
@@ -61,6 +61,7 @@ export class AuthService {
     }
     changePassword(password: string, newPassword: string) {
         const email = JSON.parse(localStorage.getItem('userData')).email;
+        console.log(this.user.value.email);
         return this.http.post<LoginResponse>('https://localhost:7207/api/Account/changepassword', {
             email: email,
             oldPassword: password,

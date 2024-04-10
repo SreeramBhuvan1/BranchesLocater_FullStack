@@ -29,16 +29,31 @@
                 </tr>
             </table>
             <br>
-            <div class="grid">
+            <!-- <div class="grid">
                 <div class="col-4 col-offset-2 ">
                     <p-button label="Edit" routerLink="edit" (click)="edit(city.cityId)"></p-button>
                 </div>
 
                 <div class="col-5 col-offset-1">
-                    <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"
-                        rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+                    
 
                     <p-button label="Delete" severity="danger" (click)="onDelete(city.cityId)"></p-button>
+                </div>
+            </div> -->
+            <div class="grid justify-content-center">
+                <div class="col-6 " style="display: flex; justify-content: center;">
+                    <p-button label="Edit" routerLink="edit" (click)="edit(city.cityId)"></p-button>
+                </div>
+                <div class="col-6" style="display: flex; justify-content: center;">
+                    
+                    <p-button label="Delete" severity="danger" (click)="onDelete(city.cityId)"></p-button>
+                </div>
+                <div class="col-6 " style="display: flex; justify-content: center;">
+                    <p-button label="Get Weather" routerLink="weather"></p-button>
+                </div>
+                <div class="col-6" style="display: flex; justify-content: center;">
+                    
+                    <p-button label="Branches" routerLink="Branches"></p-button>
                 </div>
             </div>
         </p-card>

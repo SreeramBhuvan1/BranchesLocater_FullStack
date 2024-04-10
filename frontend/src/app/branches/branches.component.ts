@@ -9,14 +9,17 @@ import { CityDetail } from '../shared-sources/cities-model';
   styleUrl: './branches.component.css'
 })
 export class BranchesComponent implements OnInit {
-  constructor(private branchSerive: BranchService, private cityService: CitiesService) { }
-
+  constructor(public branchSerive: BranchService, private cityService: CitiesService) { }
+  num_inactive:number;
   ngOnInit(): void {
     this.branchSerive.loadBranches().subscribe({
       next: res => {
         this.branchSerive.branches = res;
+        this.branchSerive.count();
       }
     });
+    
+    this.num_inactive=this.branchSerive.total_inactive;
     this.cityService.refreshList().subscribe({
       next: res => {
         this.cityService.list = res as CityDetail[];

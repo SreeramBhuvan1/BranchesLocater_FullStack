@@ -11,7 +11,7 @@
                                 <label for="buCode">BU Code</label>
                                 <input type="text" id="buCode"
                                     class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
-                                    style="height: 7vh; width: 150%;" ngModel name="buCode" required>
+                                    style="height: 7vh; width: 150%;" ngModel name="buCode" required >
                             </div>
                             <div class="field" style="display: flex; flex-direction: column; padding-left: 3px;">
                                 <label for="status">Status</label>
@@ -19,6 +19,15 @@
                                     placeholder="Select the status" id="status" ngModel name="status" required
                                     appendTo="body"></p-dropdown>
                             </div>
+                            <div class="field" *ngIf="editMode"
+                                style="display: flex; flex-direction: column; padding-left: 3px;">
+                                <label for="buCode">City</label>
+                                <p-dropdown [options]="this.cityService.list" optionLabel="cityName"
+                                optionValue="cityId" scrollHeight="150px" placeholder="Select Your City"
+                                [filter]="true" id="cityId" filterBy="cityName" ngModel name="cityId" required
+                                appendTo="body"></p-dropdown>
+                            </div>
+
                         </div>
                         <div class="field" style="padding-left: 3px;">
                             <label for="address">Address</label>
@@ -30,13 +39,16 @@
                             <div class="field" *ngIf="!editMode"
                                 style="display: flex; flex-direction: column; gap: 1px; padding-left: 4px;">
                                 <label for="openedDate">Opened Date</label>
+                                
+                            
                                 <input type="date" id="openedDate"
                                     class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary"
                                     style="height: 7vh; width: 150%;" ngModel name="openedDate" required>
+                                    <!-- <p-calendar [iconDisplay]="'input'" [showIcon]="true" appendTo="body" placeholder="mm/dd/yyyy" [showTime]="false" dateFormat="yy-MM-dd" ngModel  name="openedDate" required></p-calendar> -->
+                                    
                             </div>
-                            <div class="field"
-                                style="display: flex; flex-direction: column; gap: 1px; padding-left: 4px;"
-                                *ngIf="!editMode">
+                            <div class="field" *ngIf="!editMode"
+                                style="display: flex; flex-direction: column; gap: 1px; padding-left: 4px;">
                                 <label for="cityId">City </label>
                                 <p-dropdown [options]="this.cityService.list" optionLabel="cityName"
                                     optionValue="cityId" scrollHeight="150px" placeholder="Select Your City"
@@ -48,10 +60,10 @@
                             <label for="phone">Phone</label>
                             <input type="text" id="phone"
                                 class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
-                                ngModel name="phone" required style="height: 7vh;">
+                                ngModel name="phone" required style="height: 7vh;" placeholder="+91XXXXXX">
                         </div>
                         <div class="field" style="display: flex; flex-direction: column; gap: 1px; padding-left: 4px;">
-                            <label for="businessDays">Business Days</label>
+                            <label for="businessDays">Business Hours</label>
                             <p-multiSelect [options]="days" ngModel name="businessDays" required appendTo="body"
                                 [style]="{'width': '100%'}" required></p-multiSelect>
                         </div>
@@ -77,6 +89,15 @@
                                     ngModel name="latitude" required min="-90" max="90"
                                     [style]="{'width': '145%', 'height': '7vh !important'}">
                             </div>
+
+                            <!-- <div class="field" *ngIf="!editMode"
+                                style="display: flex; flex-direction: column; gap: 1px;">
+                                <label for="longitude">example</label>
+                                <input type="number" id="longitude"
+                                    class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary"
+                                    [(ngModel)]="long" name="longitude" required min="-180" max="180"
+                                    [style]="{'width': '135%', 'height': '7vh !important'}">
+                            </div> -->
                             <div class="field" *ngIf="!editMode"
                                 style="display: flex; flex-direction: column; gap: 1px;">
                                 <label for="longitude">Longitude</label>
@@ -90,14 +111,27 @@
                 </form>
             </p-panel>
             <br>
-            <div class="grid">
+            <!-- <div class="grid">
                 <div class="col-3 col-offset-3 ">
-                    <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"
-                        rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+                    
                     <p-button label="{{editMode ? 'Update': 'Add'}}" type="submit" [disabled]="!form.valid"
                         (click)="onSubmit(form)"></p-button>
                 </div>
+
                 <div class="col-5 col-offset-1">
+                    <p-button label="Discard" severity="danger" routerLink="../"></p-button>
+                </div>
+            </div> -->
+            <div class="grid justify-content-center">
+                <div class="col-4 " style="display: flex; justify-content: center;">
+                    <p-button label="{{editMode ? 'Update': 'Add'}}" type="submit" [disabled]="!form.valid"
+                        (click)="onSubmit(form)"></p-button>
+                </div>
+                <div class="col-4 " style="display: flex; justify-content: center;">
+                    <p-button label="Get-long/lat" (click)="getlocation(form)" ></p-button>
+                </div>
+                <div class="col-4" style="display: flex; justify-content: center;">
+                    
                     <p-button label="Discard" severity="danger" routerLink="../"></p-button>
                 </div>
             </div>

@@ -9,7 +9,7 @@
             </p-fieldset>
         </div>
         <div *ngIf="!isActive(branch.bU_Codes)">
-            <p-fieldset legend="{{id+1}}" [routerLink]="[branch.bU_Codes]" [style]="{ cursor: 'pointer' }">
+            <p-fieldset legend="{{id+1}}" [routerLink]="[branch.bU_Codes]" [style]="{ cursor: 'pointer' } " [styleClass]="branch.status === 'In-Active' ? 'InActive' : ''">
                 <p class="m-0">
                     <b>BU Code</b> : {{branch.bU_Codes | uppercase}}
                 </p>

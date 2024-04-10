@@ -4,3 +4,12 @@
         color: white;
     }
 }
+:host {
+    ::ng-deep .InActive {
+        background-color:lightgrey;
+        color: black;
+    }
+}
+::ng-deep .p-scrollpanel .p-scrollpanel-bar-y {
+    background: lightgrey;
+}

@@ -6,6 +6,8 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { CitiesService } from '../../shared-sources/cities-service';
 import { AppComponent } from '../../app.component';
 import { ConfirmEventType, ConfirmationService } from 'primeng/api';
+import { CityDetail } from '../../shared-sources/cities-model';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-branch-edit',
@@ -13,14 +15,16 @@ import { ConfirmEventType, ConfirmationService } from 'primeng/api';
   styleUrl: './branch-edit.component.css'
 })
 export class BranchEditComponent implements OnInit, AfterViewInit {
+  long:number;
   editMode = false;
   code: string;
+  city:CityDetail;
   branch: Branch;
   days: string[] = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-  statusOptions: string[] = ['Open', 'Close', 'Under-Construction'];
+  statusOptions: string[] = ['Open', 'Close', 'Under-Construction','In-Active'];
   @ViewChild('form') branchForm: NgForm
 
-  constructor(private confirmationService: ConfirmationService, private appService: AppComponent, private branchService: BranchService, private router: Router, private route: ActivatedRoute, public cityService: CitiesService) { }
+  constructor(private confirmationService: ConfirmationService, private appService: AppComponent, private branchService: BranchService, private router: Router, private route: ActivatedRoute, public cityService: CitiesService,private http: HttpClient) { }
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
@@ -47,6 +51,7 @@ export class BranchEditComponent implements OnInit, AfterViewInit {
           status: this.branch.status,
           address: this.branch.address,
           phone: this.branch.phone,
+          cityId:this.branch.cityId,
           businessDays: selectedDays,
           startTime: startTime,
           endTime: endTime
@@ -81,6 +86,29 @@ export class BranchEditComponent implements OnInit, AfterViewInit {
     }
     return false;
   }
+  getlocation(form:NgForm){
+    const cityid=form.value.cityId;
+    this.http.get<any>('https://localhost:7207/api/Cities/' + cityid + '/weather').subscribe({
+        next: res => {
+          console.log(res);
+          Promise.resolve().then(()=>{
+
+this.branchForm.form.patchValue({
+  
+  latitude:res.location.lat,
+  longitude:res.location.lon
+})
+          });
+        
+        },
+        error:err=>{
+          this.appService.customError("Unable to fetch City Weather");
+        }
+      })
+
+
+
+  }
   onSubmit(form: NgForm) {
 
     var businessHours = "";
@@ -107,14 +135,22 @@ export class BranchEditComponent implements OnInit, AfterViewInit {
             this.appService.customError("Start time should be less than End time");
             return;
           }
-          this.branchService.updateBranch(this.branch.id, this.branch.bU_Codes, businessHours, form).subscribe({
+          this.branchService.updateBranch(this.branch.id, this.branch.bU_Codes, businessHours, form.value.cityId, form).subscribe({
             next: res => {
+          //   if(this.branch.status==='In-Active'&& form.status!='In-Active'){
+          //     this.branchService.total_inactive--;
+          //   }
+          //  if(this.branch.status!='In-Active'&& form.status==='In-Active'){
+          //     this.branchService.total_inactive++;
+          //   }
+          this.branchService.loadBranches().subscribe({
+            next: res => {
+              this.branchService.branches = res;
+              this.branchService.count();
+            }
+          });
               this.appService.updateToast();
-              this.branchService.loadBranches().subscribe({
-                next: res => {
-                  this.branchService.branches = res;
-                }
-              });
+             
               var index = this.branchService.branches.findIndex(q => q.bU_Codes == this.branch.bU_Codes);
               this.branchService.branches[index] = new Branch(
                 this.branch.id,
@@ -122,7 +158,7 @@ export class BranchEditComponent implements OnInit, AfterViewInit {
                 form.value.status,
                 this.branch.opened_dt,
                 form.value.address,
-                this.branch.cityId,
+                form.value.cityId,
                 form.value.phone,
                 businessHours,
                 this.branch.latitude,
@@ -169,6 +205,25 @@ export class BranchEditComponent implements OnInit, AfterViewInit {
             this.appService.customError("Start time should be less than End time");
             return;
           }
+          for(let i of this.branchService.branches){
+            if(this.branchForm.value.buCode==i.bU_Codes){
+              this.appService.customError("Bu Code Already Exists");
+              return;
+            }
+          }
+          const dateString = this.branchForm.value.openedDate;
+          const dateObject = new Date(dateString);
+
+// Extract year, month (0-indexed), and day
+const year = dateObject.getFullYear();
+const month = String(dateObject.getMonth() + 1).padStart(2, '0'); // Add leading zero if needed
+const day = String(dateObject.getDate()).padStart(2, '0'); // Add leading zero if needed
+
+// Format the date in year-month-day format
+const formattedDate = `${year}-${month}-${day}`;
+
+console.log(formattedDate); 
+
           const branch: CreateBranch = new CreateBranch(
             this.branchForm.value.buCode,
             this.branchForm.value.status,
@@ -180,8 +235,17 @@ export class BranchEditComponent implements OnInit, AfterViewInit {
             this.branchForm.value.latitude,
             this.branchForm.value.longitude
           );
+          
+
+// Parse the date string into a Date object
+
+
+          
           this.branchService.addBranch(branch).subscribe({
             next: res => {
+              if(branch.status==='In-Active'){
+                this.branchService.total_inactive++;
+              }
               this.appService.addedToast();
               this.branchService.loadBranches().subscribe({
                 next: res => {

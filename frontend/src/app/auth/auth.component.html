@@ -2,7 +2,7 @@
     position: relative;
     margin: 0px;
     height: 100vh;">
-    
+
     <div style="
         position: absolute;
         content: '';
@@ -30,7 +30,7 @@
                     ngModel name="email" required email>
             </div>
             <div class="field" style="display: flex; flex-direction: column;">
-                <label for="password">Password</label>
+                <label for="password" >Password</label>
                 <p-password type="password" id="password" [toggleMask]="true" [feedback]="!isLoginMode && !user"
                     class="text-base text-color surface-overlay w-full" ngModel name="password" required
                     [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" minlength="6"></p-password>
@@ -64,6 +64,10 @@
                 <input type="text" id="lastname"
                     class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
                     ngModel name="lastname" required>
+            </div>
+            <div class="field" style="display: flex; flex-direction: column;" *ngIf="isLoginMode">
+               
+                <a  style="color: red; cursor: pointer;" (click)="resetPassword()">Forgot Password?</a>
             </div>
             <div class="grid justify-content-around" style="margin-top: 2%;">
                 <button class="col-5" pButton type="submit" [disabled]="!authForm.valid" label="Change"

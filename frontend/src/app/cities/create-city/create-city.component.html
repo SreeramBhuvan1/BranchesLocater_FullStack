@@ -42,16 +42,15 @@
             <br>
             <div class="grid justify-content-around">
                 <div class="col-4 md:col-offset-2">
-                    <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"
-                        rejectButtonStyleClass="p-button-text"></p-confirmDialog>
-
-                    <button type="button" [disabled]="!form.valid" pButton pRipple class="p-button-success mb-2"
+                    
+                    <button type="button" [disabled]="!form.valid" pButton pRipple class="p-button mb-2"
                         (click)="onSubmit(form)">{{editMode? "Update" :"Add"}}</button>
                 </div>
                 <div class="col-6">
                     <p-button severity="danger" routerLink="../">Discard</p-button>
                 </div>
             </div>
+           
         </p-card>
     </div>
 </div>

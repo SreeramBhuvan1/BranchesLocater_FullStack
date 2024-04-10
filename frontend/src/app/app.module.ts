@@ -45,6 +45,8 @@ import { ToastModule } from 'primeng/toast';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { CalendarModule } from 'primeng/calendar';
 import { MenuModule } from 'primeng/menu';
+import { CitiesWeatherComponent } from './cities/cities-weather/cities-weather.component';
+import { CitiesBranchesComponent } from './cities/cities-branches/cities-branches.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +63,9 @@ import { MenuModule } from 'primeng/menu';
     BranchDetailsComponent,
     BranchEditComponent,
     BranchStartComponent,
-    BranchWeatherComponent
+    BranchWeatherComponent,
+    CitiesWeatherComponent,
+    CitiesBranchesComponent
   ],
   imports: [
     BrowserModule,

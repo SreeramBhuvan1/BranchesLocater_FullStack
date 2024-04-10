@@ -19,7 +19,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   ];
   sub: Subscription;
   user: any;
-  constructor(private appservice:AppComponent,private router: Router, private authService: AuthService, private activeroute: ActivatedRoute, private confirmationService: ConfirmationService, private messageService: MessageService) { }
+  constructor(private appservice:AppComponent,private router: Router, public authService: AuthService, private activeroute: ActivatedRoute, private confirmationService: ConfirmationService, private messageService: MessageService) { }
 
   ngOnInit(): void {
     this.sub = this.authService.user.subscribe(user => {
@@ -28,6 +28,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
       }
       else {
         this.user = user;
+        
       }
     })
     this.items = [
@@ -43,27 +44,28 @@ export class NavbarComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }
-  onLogout() {
-    this.confirmationService.confirm({
-      message: 'Are you sure you want to log out?',
-      header: 'Confirm Logout',
-      icon: 'pi pi-exclamation-triangle',
-      accept: () => {
-        console.log("hi in logout");
-        this.authService.logout();
-      },
-      reject: (type) => {
-        switch (type) {
-          case ConfirmEventType.REJECT:
-            this.appservice.rejected();
 
-            break;
-          case ConfirmEventType.CANCEL:
-            this.appservice.cancelled();
-            break;
-        }
-      }
-    });
+  onLogout() {
+    // this.confirmationService.confirm({
+    //   message: 'Are you sure you want to log out?',
+    //   header: 'Confirm Logout',
+    //   icon: 'pi pi-exclamation-triangle',
+    //   accept: () => {
+    //     this.authService.logout();
+    //   },
+    //   reject: (type) => {
+    //     switch (type) {
+    //       case ConfirmEventType.REJECT:
+    //         this.appservice.rejected();
+
+    //         break;
+    //       case ConfirmEventType.CANCEL:
+    //         this.appservice.cancelled();
+    //         break;
+    //     }
+    //   }
+    // });
+    this.authService.logout();
    
   }
 }

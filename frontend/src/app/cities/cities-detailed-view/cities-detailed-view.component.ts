@@ -5,6 +5,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ConfirmEventType } from 'primeng/api';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { AppComponent } from '../../app.component';
+import { CitiesBranchesComponent } from '../cities-branches/cities-branches.component';
 
 @Component({
   selector: 'app-cities-detailed-view',
@@ -17,7 +18,7 @@ export class CitiesDetailedViewComponent implements OnInit {
   city: CityDetail;
   cities: CityDetail[] = [];
 
-  constructor(private appservice: AppComponent, private service: CitiesService, private router: Router, private activeroute: ActivatedRoute, private confirmationService: ConfirmationService, private messageService: MessageService) {
+  constructor( private appservice: AppComponent, private service: CitiesService, private router: Router, private activeroute: ActivatedRoute, private confirmationService: ConfirmationService, private messageService: MessageService) {
   }
   ngOnInit(): void {
 
@@ -28,7 +29,7 @@ export class CitiesDetailedViewComponent implements OnInit {
     );
   }
   edit(id: number) {
-    this.service.Setvaluesinform(this.city);
+    // this.service.Setvaluesinform(this.city);
     this.router.navigate(['../', id, 'edit'], { relativeTo: this.activeroute });
   }
   onDelete(id: number) {

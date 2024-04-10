@@ -4,6 +4,7 @@ import { Observable, Subject, of } from 'rxjs';
 import { Injectable, OnInit } from '@angular/core';
 import { CityDetail } from './cities-model';
 import { AppComponent } from '../app.component';
+import { Branch } from '../branches/branch.model';
 @Injectable({
     providedIn: 'root'
 })
@@ -59,6 +60,9 @@ export class CitiesService {
         // return city;
 
         return this.list.slice().find(x => x.cityId == id);
+    }
+    getBranchesWithCityId(id:number){
+        return this.http.get<Branch[]>(this.url+'/'+'branchesWithCityId/'+id);
     }
     deleteId(id: number) {
 

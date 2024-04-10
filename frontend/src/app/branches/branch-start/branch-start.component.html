@@ -1,5 +1,11 @@
 <div class="grid">
     <div class="col-11 col-offset-1" style="text-align: center;">
-        <p-card header="Please select a Branch to see the details"></p-card>
+        <p-card header="Please select a Branch to see the details.... Or Enter the BuCode">     
+            <p-dropdown [options]="this.branchService.branches" optionLabel="bU_Codes"
+            optionValue="bU_Codes" scrollHeight="150px" placeholder="Select BuCode"
+            [filter]="true" id="bU_Codes" filterBy="bU_Codes" [(ngModel)]="selectedBranch" required
+            appendTo="body"></p-dropdown>
+            <p-button label="Get Details"  iconPos="right" style="margin-left: 10px;"(click)="Clicked()" ></p-button>
+        </p-card>
     </div>
 </div>
